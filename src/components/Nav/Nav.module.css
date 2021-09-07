@@ -1,0 +1,10 @@
+.Nav {
+  grid-area: nav;
+  background-color: darkgray;
+  color: white;
+}
+.Nav li {
+  list-style: none;
+}
+
+/*# sourceMappingURL=Nav.module.css.map */

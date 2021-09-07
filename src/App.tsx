@@ -1,11 +1,15 @@
 import React from 'react';
-import './App.css';
-import Header from "./component/Header";
+import style from './App.module.scss';
+import Header from "./components/Header/Header";
+import Nav from "./components/Nav/Nav";
+import Main from "./components/Main/Profile";
 
  function App() {
     return (
-        <div className="App">
+        <div className={style.Wrapper}>
             <Header />
+            <Nav />
+            <Main />
         </div>
     );
 }

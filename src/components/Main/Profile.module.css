@@ -1,0 +1,9 @@
+.Profile {
+  grid-area: profile;
+  background-color: azure;
+}
+.Profile .screenImg {
+  width: 550px;
+}
+
+/*# sourceMappingURL=Profile.module.css.map */

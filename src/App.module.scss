@@ -1,0 +1,11 @@
+.Wrapper {
+  max-width: 1200px;
+  display: grid;
+  grid-template-areas:
+  "header header"
+  "nav profile";
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 2fr 10fr;
+}
+
+

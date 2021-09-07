@@ -1,0 +1,9 @@
+.Header {
+  grid-area: header;
+  background-color: darkslategray;
+}
+.Header .reactLogo {
+  width: 65px;
+}
+
+/*# sourceMappingURL=Header.module.css.map */
