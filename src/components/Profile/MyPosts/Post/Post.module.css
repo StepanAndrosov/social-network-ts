@@ -1,0 +1,28 @@
+.Post {
+  display: flex;
+  margin: 15px;
+}
+.Post img {
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 60px;
+}
+.Post .messageBlock {
+  margin-left: 15px;
+  border-radius: 20px;
+  padding: 10px;
+  max-width: 500px;
+  background-color: darkslategray;
+}
+.Post span {
+  color: white;
+  padding-left: 10px;
+}
+.Post .likesCount {
+  margin-left: 15px;
+  padding: 5px;
+  background-color: darkgray;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=Post.module.css.map */

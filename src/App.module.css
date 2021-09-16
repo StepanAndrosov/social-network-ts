@@ -1,9 +1,18 @@
 .Wrapper {
   max-width: 1200px;
   display: grid;
-  grid-template-areas: "header header" "nav profile";
+  grid-template-areas: "header header" "nav main";
   grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 10fr;
+}
+.Wrapper .Nav {
+  grid-area: nav;
+  background-color: darkgray;
+  color: white;
+}
+.Wrapper .Main {
+  grid-area: main;
+  background-color: azure;
 }
 
 /*# sourceMappingURL=App.module.css.map */

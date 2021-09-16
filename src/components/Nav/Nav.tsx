@@ -1,8 +1,8 @@
-import style from "./Nav.module.scss";
-import React from "react";
+import style from "./Nav.module.scss"
+import React from "react"
 
 
-const Nav = () => {
+export const Nav: React.FC = () => {
     return (
         <nav className={style.Nav}>
             <ul>
@@ -12,7 +12,6 @@ const Nav = () => {
                 <li>Music</li>
                 <li>Settings</li>
             </ul>
-        </nav>)
+        </nav>
+    )
 }
-
-export default Nav

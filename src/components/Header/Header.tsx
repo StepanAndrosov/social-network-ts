@@ -2,7 +2,7 @@ import React from "react"
 import reactLogo from "../../accets/images/react.png"
 import style from "./Header.module.scss"
 
-function Header() {
+export const Header: React.FC = () => {
     return (
         <div className={style.Header}>
             <header >
@@ -12,4 +12,3 @@ function Header() {
     );
 }
 
-export default Header;

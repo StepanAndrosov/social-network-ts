@@ -3,9 +3,20 @@
   display: grid;
   grid-template-areas:
   "header header"
-  "nav profile";
+  "nav main";
   grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 10fr;
+
+  .Nav {
+    grid-area: nav;
+    background-color: darkgray;
+    color: white;
+  }
+
+  .Main {
+    grid-area: main;
+    background-color: azure;
+  }
 }
 
 

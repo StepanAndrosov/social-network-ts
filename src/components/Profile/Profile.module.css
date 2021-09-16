@@ -1,8 +1,5 @@
-.Profile {
-  grid-area: profile;
-  background-color: azure;
-}
 .Profile .screenImg {
+  margin: 10px;
   width: 550px;
 }
 
