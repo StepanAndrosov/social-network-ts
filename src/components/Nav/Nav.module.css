@@ -1,5 +1,12 @@
 .Nav li {
   list-style: none;
 }
+.Nav li a {
+  color: white;
+  text-decoration: none;
+}
+.Nav li a.active {
+  color: indigo;
+}
 
 /*# sourceMappingURL=Nav.module.css.map */

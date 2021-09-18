@@ -8,7 +8,6 @@
 .Wrapper .Nav {
   grid-area: nav;
   background-color: darkgray;
-  color: white;
 }
 .Wrapper .Main {
   grid-area: main;
