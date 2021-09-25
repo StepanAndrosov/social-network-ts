@@ -1,13 +1,9 @@
 import React from "react"
 import style from "./Post.module.scss"
 import postImg from "./../../../../accets/images/fin.jpg"
+import {PostType} from "../../../../state-study/state";
 
-type PostPropsType = {
-    message: string
-    likesCount: number
-}
-
-export const Post: React.FC<PostPropsType> = ({message, likesCount}) => {
+export const Post: React.FC<PostType> = ({message, likesCount}) => {
     return (
         <div className={style.Post}>
             <img src={postImg} alt={"img post"}/>

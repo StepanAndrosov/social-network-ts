@@ -1,3 +1,21 @@
-
+.Dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+.Dialogs .dialogItems {
+  background-color: darkslateblue;
+  padding: 10px;
+}
+.Dialogs a {
+  color: white;
+  text-decoration: none;
+}
+.Dialogs .messages {
+  padding: 10px;
+}
+.Dialogs .active {
+  color: aqua;
+  font-weight: bold;
+}
 
 /*# sourceMappingURL=Dialogs.module.css.map */

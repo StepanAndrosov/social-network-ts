@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
+import {App} from './App';
 import reportWebVitals from './reportWebVitals';
+import {state} from "./state-study/state";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App profilePage={state.profilePage} dialogsPage={state.dialogsPage}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

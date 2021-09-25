@@ -1,23 +1,23 @@
-import React from 'react';
-import style from './App.module.scss';
-import {Header} from "./components/Header/Header";
-import {Nav} from "./components/Nav/Nav";
-import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import React from 'react'
+import style from './App.module.scss'
+import {Header} from "./components/Header/Header"
+import {Nav} from "./components/Nav/Nav"
+import {Profile} from "./components/Profile/Profile"
+import {Dialogs} from "./components/Dialogs/Dialogs"
+import {BrowserRouter, Route} from "react-router-dom"
+import {StateType} from "./state-study/state"
 
-const App: React.FC = () => {
+export const App: React.FC<StateType> = ({profilePage, dialogsPage}) => {
     return (
         <BrowserRouter>
             <div className={style.Wrapper}>
                 <Header/>
-                    <Nav/>
+                <Nav/>
                 <div className={style.Main}>
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' render={() => <Profile postsData={profilePage.postsData} />}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsPage.dialogsData} messagesData={dialogsPage.messagesData} />}/>
                 </div>
             </div>
         </BrowserRouter>
-    );
+    )
 }
-export default App;

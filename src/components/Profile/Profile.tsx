@@ -1,16 +1,14 @@
 import style from "./Profile.module.scss"
-import screenImg from "../../accets/images/screen.jpg"
 import React from "react"
-import {MyPosts} from "./MyPosts/MyPosts";
+import {MyPosts} from "./MyPosts/MyPosts"
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
+import {ProfilePageType} from "../../state-study/state"
 
-export const Profile: React.FC = () => {
+export const Profile: React.FC<ProfilePageType> = ({postsData}) => {
     return (
         <div className={style.Profile}>
-            <div>
-                <img className={style.screenImg} src={screenImg} alt="blade-runner-background"/>
-            </div>
-            <div>ava</div>
-            <MyPosts />
+            <ProfileInfo />
+            <MyPosts postsData={postsData}/>
         </div>
     )
 }
