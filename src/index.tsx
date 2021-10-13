@@ -3,14 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
-import {state} from "./state-study/state";
+import {store} from "./state-study/state";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App profilePage={state.profilePage} dialogsPage={state.dialogsPage}/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+
+export const rerenderEntireTree = () => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App store={store}/>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+rerenderEntireTree()
+store.subscribe(rerenderEntireTree)
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
