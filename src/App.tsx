@@ -15,13 +15,13 @@ export const App: React.FC<PropsType> = ({store}) => {
 
     const profilePageProps = store.getState().profilePage
     const postsData = profilePageProps.postsData
-    const addPost = profilePageProps.addPost.bind(store)
     const newPostText = profilePageProps.newPostText
-    const updateNewPostText = profilePageProps.updateNewPostText.bind(store)
 
     const dialogsPageProps = store.getState().dialogsPage
     const dialogsData = dialogsPageProps.dialogsData
     const messagesData = dialogsPageProps.messagesData
+
+    const dispatch = store.dispatch.bind(store)
 
 
     return (
@@ -31,11 +31,10 @@ export const App: React.FC<PropsType> = ({store}) => {
                 <Nav/>
                 <div className={style.Main}>
                     <Route path='/profile' render={() => <Profile postsData={postsData}
-                                                                  addPost={addPost}
                                                                   newPostText={newPostText}
-                                                                  updateNewPostText={updateNewPostText}/>}/>
+                                                                  dispatch={dispatch}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsData}
-                                                                  messagesData={messagesData} />}/>
+                                                                  messagesData={messagesData}/>}/>
                 </div>
             </div>
         </BrowserRouter>

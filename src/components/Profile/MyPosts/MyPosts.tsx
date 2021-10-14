@@ -1,22 +1,30 @@
 import React, {createRef} from "react";
 import style from "./MyPosts.module.scss"
 import {Post} from "./Post/Post"
-import {ProfilePageType} from "../../../state-study/state";
+import {ActionsType, PostType} from "../../../state-study/state";
 
-export const MyPosts: React.FC<ProfilePageType> = ({postsData, ...props}) => {
+type MyPostsPropsType = {
+    postsData: Array<PostType>
+    dispatch: (action: ActionsType) => void
+    newPostText: string
+}
+
+export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
 
     const newPostElement = createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        if (newPostElement.current) {
-            props.addPost(newPostElement.current.value)
+        const current = newPostElement.current
+        if (current) {
+            props.dispatch({type: "ADD-POST", postText: current.value})
         }
     }
 
     const onPostChange = () => {
-        if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
-            newPostElement.current.value = ''
+        const current = newPostElement.current
+        if (current) {
+            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: current.value})
+            current.value = ''
         }
     }
 

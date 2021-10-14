@@ -15,8 +15,6 @@ export type PostType = {
 export type ProfilePageType = {
     postsData: Array<PostType>
     newPostText: string
-    addPost: (postText: string) => void
-    updateNewPostText: (newText: string) => void
 }
 export type DialogsPageType = {
     dialogsData: Array<DialogType>
@@ -27,11 +25,22 @@ export type StateType = {
     dialogsPage: DialogsPageType
 }
 
+export type ActionsType = AddPostType | UpdateNewPostTextType
+type AddPostType = {
+    type: "ADD-POST"
+    postText: string
+}
+type UpdateNewPostTextType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
     subscribe: (callback: ()=>void) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const store: StoreType = {
@@ -43,22 +52,7 @@ export const store: StoreType = {
                 {id: 3, message: 'My brother is Jake', likesCount: 3650},
                 {id: 4, message: 'It`s my first post', likesCount: 1545}
             ],
-            newPostText: "It is a crazy FLUX!",
-            addPost (postText: string) {
-                const newPost: PostType = {
-                    id: 5,
-                    message: postText,
-                    likesCount: 0
-                }
-                store.getState().profilePage.postsData.push(newPost)
-                store.getState().profilePage.newPostText = ''
-                store._callSubscriber()
-            },
-            updateNewPostText (newText: string) {
-                store.getState().profilePage.newPostText = newText
-                store._callSubscriber()
-            }
-        },
+            newPostText: "It is a crazy FLUX!"},
         dialogsPage: {
             dialogsData: [
                 {id: 1, name: 'Rick'},
@@ -80,6 +74,24 @@ export const store: StoreType = {
     },
     subscribe(callback){
         this._callSubscriber = callback
+    },
+    dispatch (action) {
+        switch (action.type) {
+            case "ADD-POST":
+                const newPost: PostType = {
+                    id: 5,
+                    message: action.postText,
+                    likesCount: 0
+                }
+                this.getState().profilePage.postsData = [{...newPost}, ...store.getState().profilePage.postsData]
+                this.getState().profilePage.newPostText = ''
+                this._callSubscriber()
+                break
+            case "UPDATE-NEW-POST-TEXT":
+                this.getState().profilePage.newPostText = action.newText
+                this._callSubscriber()
+                break
+        }
     }
 }
 
