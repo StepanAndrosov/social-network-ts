@@ -1,7 +1,8 @@
 import React, {createRef} from "react";
 import style from "./MyPosts.module.scss"
 import {Post} from "./Post/Post"
-import {PostType, ActionsType, addPostAC, updateNewPostTextAC} from "../../../state-study/state";
+import {PostType, ActionsType} from "../../../state-study/state";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
     postsData: Array<PostType>

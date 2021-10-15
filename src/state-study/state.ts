@@ -1,7 +1,5 @@
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
-const SEND_MESSAGE = "SEND_MESSAGE"
+import {addPostAC, profileReducer, updateNewPostTextAC} from "../redux/profile-reducer";
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "../redux/dialogs-reducer";
 
 export type MessageType = {
     id: number
@@ -34,7 +32,6 @@ export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
-
 
 export type StoreType = {
     _state: StateType
@@ -81,59 +78,12 @@ export const store: StoreType = {
         this._callSubscriber = callback
     },
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                const newPost: PostType = {
-                    id: Math.random()*100,
-                    message: action.postText,
-                    likesCount: 0
-                }
-                this.getState().profilePage.postsData = [{...newPost}, ...store.getState().profilePage.postsData]
-                this.getState().profilePage.newPostText = ''
-                this._callSubscriber()
-                break
-            case UPDATE_NEW_POST_TEXT:
-                this.getState().profilePage.newPostText = action.newText
-                this._callSubscriber()
-                break
-            case UPDATE_NEW_MESSAGE_BODY:
-                this.getState().dialogsPage.newMessageBody = action.body
-                this._callSubscriber()
-                break
-            case SEND_MESSAGE:
-                const newMessage: MessageType = {
-                    id: Math.random()*100,
-                    message: this.getState().dialogsPage.newMessageBody
-                }
-                this.getState().dialogsPage.messagesData = [...store.getState().dialogsPage.messagesData, {...newMessage}]
-                this.getState().dialogsPage.newMessageBody = ''
-                this._callSubscriber()
-                break
-        }
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber()
     }
 }
 
-export const addPostAC = (postText: string) => {
-    return {
-        type: ADD_POST,
-        postText: postText
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
 
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-export const sendMessageAC = () => {
-    return {
-        type: SEND_MESSAGE
-    } as const
-}
+
+
