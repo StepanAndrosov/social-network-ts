@@ -20,7 +20,7 @@ export const App: React.FC<PropsType> = ({store}) => {
     const dialogsPageProps = store.getState().dialogsPage
     const dialogsData = dialogsPageProps.dialogsData
     const messagesData = dialogsPageProps.messagesData
-
+    const newMessageBody = dialogsPageProps.newMessageBody
     const dispatch = store.dispatch.bind(store)
 
 
@@ -32,9 +32,13 @@ export const App: React.FC<PropsType> = ({store}) => {
                 <div className={style.Main}>
                     <Route path='/profile' render={() => <Profile postsData={postsData}
                                                                   newPostText={newPostText}
-                                                                  dispatch={dispatch}/>}/>
+                                                                  dispatch={dispatch}/>
+                    }/>
                     <Route path='/dialogs' render={() => <Dialogs dialogsData={dialogsData}
-                                                                  messagesData={messagesData}/>}/>
+                                                                  messagesData={messagesData}
+                                                                  newMessageBody={newMessageBody}
+                                                                  dispatch={dispatch}/>
+                    }/>
                 </div>
             </div>
         </BrowserRouter>

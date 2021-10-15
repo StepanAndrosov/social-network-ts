@@ -1,7 +1,12 @@
 import React from "react"
 import style from "./Post.module.scss"
 import postImg from "./../../../../accets/images/fin.jpg"
-import {PostType} from "../../../../state-study/state";
+
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 export const Post: React.FC<PostType> = ({message, likesCount}) => {
     return (

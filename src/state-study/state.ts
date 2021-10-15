@@ -1,11 +1,13 @@
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
+const SEND_MESSAGE = "SEND_MESSAGE"
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
 }
@@ -21,19 +23,24 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
+    newMessageBody: string
 }
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionsType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
-    subscribe: (callback: ()=>void) => void
+    subscribe: (callback: () => void) => void
     dispatch: (action: ActionsType) => void
 }
 
@@ -46,7 +53,8 @@ export const store: StoreType = {
                 {id: 3, message: 'My brother is Jake', likesCount: 3650},
                 {id: 4, message: 'It`s my first post', likesCount: 1545}
             ],
-            newPostText: "It is a crazy FLUX!"},
+            newPostText: "It is a crazy FLUX!"
+        },
         dialogsPage: {
             dialogsData: [
                 {id: 1, name: 'Rick'},
@@ -59,21 +67,24 @@ export const store: StoreType = {
                 {id: 2, message: 'I`m cucumber'},
                 {id: 3, message: 'Where is my portal gun?'},
                 {id: 4, message: 'Morty is jerk!'}
-            ]
+            ],
+            newMessageBody: ""
         },
     },
-    getState() {return this._state},
-    _callSubscriber(){
+    getState() {
+        return this._state
+    },
+    _callSubscriber() {
         console.log("State changed")
     },
-    subscribe(callback){
+    subscribe(callback) {
         this._callSubscriber = callback
     },
-    dispatch (action) {
+    dispatch(action) {
         switch (action.type) {
             case ADD_POST:
                 const newPost: PostType = {
-                    id: 5,
+                    id: Math.random()*100,
                     message: action.postText,
                     likesCount: 0
                 }
@@ -83,6 +94,19 @@ export const store: StoreType = {
                 break
             case UPDATE_NEW_POST_TEXT:
                 this.getState().profilePage.newPostText = action.newText
+                this._callSubscriber()
+                break
+            case UPDATE_NEW_MESSAGE_BODY:
+                this.getState().dialogsPage.newMessageBody = action.body
+                this._callSubscriber()
+                break
+            case SEND_MESSAGE:
+                const newMessage: MessageType = {
+                    id: Math.random()*100,
+                    message: this.getState().dialogsPage.newMessageBody
+                }
+                this.getState().dialogsPage.messagesData = [...store.getState().dialogsPage.messagesData, {...newMessage}]
+                this.getState().dialogsPage.newMessageBody = ''
                 this._callSubscriber()
                 break
         }
@@ -99,5 +123,17 @@ export const updateNewPostTextAC = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
+    } as const
+}
+
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    } as const
+}
+export const sendMessageAC = () => {
+    return {
+        type: SEND_MESSAGE
     } as const
 }
