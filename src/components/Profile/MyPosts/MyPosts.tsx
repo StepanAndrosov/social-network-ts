@@ -1,7 +1,7 @@
 import React, {createRef} from "react";
 import style from "./MyPosts.module.scss"
 import {Post} from "./Post/Post"
-import {ActionsType, PostType} from "../../../state-study/state";
+import {PostType, ActionsType, addPostAC, updateNewPostTextAC} from "../../../state-study/state";
 
 type MyPostsPropsType = {
     postsData: Array<PostType>
@@ -16,14 +16,14 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
     const addPost = () => {
         const current = newPostElement.current
         if (current) {
-            props.dispatch({type: "ADD-POST", postText: current.value})
+            props.dispatch(addPostAC(current.value))
         }
     }
 
     const onPostChange = () => {
         const current = newPostElement.current
         if (current) {
-            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: current.value})
+            props.dispatch(updateNewPostTextAC(current.value))
             current.value = ''
         }
     }

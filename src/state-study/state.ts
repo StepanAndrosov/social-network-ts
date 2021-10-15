@@ -1,3 +1,5 @@
+const ADD_POST = "ADD-POST"
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 
 type MessageType = {
     id: number
@@ -25,15 +27,7 @@ export type StateType = {
     dialogsPage: DialogsPageType
 }
 
-export type ActionsType = AddPostType | UpdateNewPostTextType
-type AddPostType = {
-    type: "ADD-POST"
-    postText: string
-}
-type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
 
 export type StoreType = {
     _state: StateType
@@ -77,7 +71,7 @@ export const store: StoreType = {
     },
     dispatch (action) {
         switch (action.type) {
-            case "ADD-POST":
+            case ADD_POST:
                 const newPost: PostType = {
                     id: 5,
                     message: action.postText,
@@ -87,7 +81,7 @@ export const store: StoreType = {
                 this.getState().profilePage.newPostText = ''
                 this._callSubscriber()
                 break
-            case "UPDATE-NEW-POST-TEXT":
+            case UPDATE_NEW_POST_TEXT:
                 this.getState().profilePage.newPostText = action.newText
                 this._callSubscriber()
                 break
@@ -95,4 +89,15 @@ export const store: StoreType = {
     }
 }
 
-
+export const addPostAC = (postText: string) => {
+    return {
+        type: ADD_POST,
+        postText: postText
+    } as const
+}
+export const updateNewPostTextAC = (newText: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: newText
+    } as const
+}
