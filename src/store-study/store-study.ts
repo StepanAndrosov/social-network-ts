@@ -24,7 +24,7 @@ type DialogsPageType = {
     newMessageBody: string
 }
 
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
@@ -42,7 +42,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const store: StoreType = {
+export const storeStudy: StoreType = {
     _state: {
         profilePage: {
             postsData: [

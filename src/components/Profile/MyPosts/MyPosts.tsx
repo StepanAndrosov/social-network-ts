@@ -1,30 +1,29 @@
 import React, {createRef} from "react";
 import style from "./MyPosts.module.scss"
 import {Post} from "./Post/Post"
-import {ActionsType} from "../../../store-study/store";
-import {addPostAC, PostType, updateNewPostTextAC} from "../../../redux/profile-reducer";
+import {PostType} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
     postsData: Array<PostType>
-    dispatch: (action: ActionsType) => void
     newPostText: string
+    addPost: (text: string) => void
+    updateNewPostText: (text: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
 
     const newPostElement = createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
+    const onAddPost = () => {
         const current = newPostElement.current
         if (current) {
-            props.dispatch(addPostAC(current.value))
+            props.addPost(current.value)
         }
     }
-
     const onPostChange = () => {
         const current = newPostElement.current
         if (current) {
-            props.dispatch(updateNewPostTextAC(current.value))
+            props.updateNewPostText(current.value)
             current.value = ''
         }
     }
@@ -39,7 +38,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
                                    value={props.newPostText}/>
                     </div>
                     <div>
-                        <button onClick={addPost}>Add</button>
+                        <button onClick={onAddPost}>Add</button>
                     </div>
                 </div>
             </div>

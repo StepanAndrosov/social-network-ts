@@ -1,9 +1,9 @@
 import style from "./Profile.module.scss"
 import React from "react"
-import {MyPosts} from "./MyPosts/MyPosts"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
-import {ActionsType} from "../../store-study/store"
+import {ActionsType} from "../../store-study/store-study"
 import {PostType} from "../../redux/profile-reducer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 type ProfilePropsType = {
     postsData: Array<PostType>
@@ -15,7 +15,7 @@ export const Profile: React.FC<ProfilePropsType> = ({postsData, ...props}) => {
     return (
         <div className={style.Profile}>
             <ProfileInfo />
-            <MyPosts postsData={postsData}
+            <MyPostsContainer postsData={postsData}
                      newPostText={props.newPostText}
                      dispatch={props.dispatch}/>
         </div>

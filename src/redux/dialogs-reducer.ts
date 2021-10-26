@@ -1,4 +1,4 @@
-import {ActionsType} from "../store-study/store";
+import {ActionsType} from "../store-study/store-study";
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
