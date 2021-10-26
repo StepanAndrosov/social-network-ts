@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./state-study/state";
+import {store} from "./redux/redux-store";
 
 
 export const rerenderEntireTree = () => {
@@ -16,7 +16,8 @@ export const rerenderEntireTree = () => {
 }
 
 rerenderEntireTree()
-store.subscribe(rerenderEntireTree)
+store.subscribe(()=> {
+    rerenderEntireTree()})
 
 
 

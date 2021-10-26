@@ -1,28 +1,29 @@
 import {addPostAC, profileReducer, updateNewPostTextAC} from "../redux/profile-reducer";
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "../redux/dialogs-reducer";
 
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
-export type PostType = {
+type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     postsData: Array<PostType>
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
     newMessageBody: string
 }
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

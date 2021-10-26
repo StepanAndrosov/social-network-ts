@@ -2,7 +2,8 @@ import style from "./Profile.module.scss"
 import React from "react"
 import {MyPosts} from "./MyPosts/MyPosts"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
-import {ActionsType, PostType} from "../../state-study/state"
+import {ActionsType} from "../../store-study/store"
+import {PostType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     postsData: Array<PostType>

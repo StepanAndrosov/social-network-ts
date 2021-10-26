@@ -5,19 +5,18 @@ import {Nav} from "./components/Nav/Nav"
 import {Profile} from "./components/Profile/Profile"
 import {Dialogs} from "./components/Dialogs/Dialogs"
 import {BrowserRouter, Route} from "react-router-dom"
-import {StoreType} from "./state-study/state";
 
 type PropsType = {
-    store: StoreType
+    store: any
 }
 
 export const App: React.FC<PropsType> = ({store}) => {
-
-    const profilePageProps = store.getState().profilePage
+    console.log(store)
+    const profilePageProps = store.getState().profileReducer
     const postsData = profilePageProps.postsData
     const newPostText = profilePageProps.newPostText
 
-    const dialogsPageProps = store.getState().dialogsPage
+    const dialogsPageProps = store.getState().dialogsReducer
     const dialogsData = dialogsPageProps.dialogsData
     const messagesData = dialogsPageProps.messagesData
     const newMessageBody = dialogsPageProps.newMessageBody
