@@ -3,8 +3,8 @@ import {ProfilePageType, profileReducer} from "./profile-reducer";
 import {DialogsPageType, dialogsReducer} from "./dialogs-reducer";
 
 export type StateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
+    profileReducer: ProfilePageType
+    dialogsReducer: DialogsPageType
 }
 
 const reducers = combineReducers({
