@@ -8,7 +8,7 @@ export const Profile: React.FC = () => {
     return (
         <div className={style.Profile}>
             <ProfileInfo />
-            <MyPostsContainer/>
+            <MyPostsContainer  />
         </div>
     )
 }
