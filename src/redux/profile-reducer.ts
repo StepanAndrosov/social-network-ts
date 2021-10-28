@@ -21,7 +21,7 @@ const initialState: ProfilePageType = {
         {id: 3, message: 'My brother is Jake', likesCount: 3650},
         {id: 4, message: 'It`s my first post', likesCount: 1545}
     ],
-        newPostText: "It is a crazy FLUX!"
+    newPostText: "It is a crazy FLUX!"
 }
 
 export const profileReducer = (state = initialState, action: ActionsType) => {
@@ -32,12 +32,16 @@ export const profileReducer = (state = initialState, action: ActionsType) => {
                 message: action.postText,
                 likesCount: 0
             }
-            state.postsData = [{...newPost}, ...state.postsData]
-            state.newPostText = ''
-            return state
+            return {
+                ...state,
+                postsData:[{...newPost}, ...state.postsData],
+                newPostText: ''
+            }
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         default:
             return state
     }
