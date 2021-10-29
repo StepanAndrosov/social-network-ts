@@ -1,20 +1,22 @@
 import {combineReducers, createStore} from "redux";
-import {ProfilePageType, profileReducer} from "./profile-reducer";
-import {DialogsPageType, dialogsReducer} from "./dialogs-reducer";
-import {ActionsType} from "../store-study/store-study";
+import {profileReducer, addPostAC, updateNewPostTextAC} from "./profile-reducer";
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {usersReducer, followAC, setUsersAC,} from "./users-reducer";
 
-export type StateType = {
-    profileReducer: ProfilePageType
-    dialogsReducer: DialogsPageType
-}
-export type StoreType = {
-    dispatch: (action: ActionsType) => void
-    getState: () => StateType
-}
+export type ActionsType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof followAC>
+    //| ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
 
-const reducers = combineReducers({
-    profileReducer,
-    dialogsReducer
+export type AppStateType = ReturnType<typeof rootReducer>
+
+const rootReducer = combineReducers({
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer
 })
 
-export const store = createStore(reducers)
+export const store = createStore(rootReducer)

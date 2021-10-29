@@ -1,0 +1,8 @@
+.Users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header {
+    padding-left: 30px;
+}

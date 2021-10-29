@@ -1,4 +1,4 @@
-import {ActionsType} from "../store-study/store-study";
+import {ActionsType} from "./redux-store";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -24,7 +24,7 @@ const initialState: ProfilePageType = {
     newPostText: "It is a crazy FLUX!"
 }
 
-export const profileReducer = (state = initialState, action: ActionsType) => {
+export const profileReducer = (state = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {

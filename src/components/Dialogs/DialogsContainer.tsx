@@ -1,19 +1,24 @@
-import {Dispatch} from "react"
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {Dispatch} from "redux"
+import {DialogsPageType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
-import {ActionsType} from "../../store-study/store-study";
+import {ActionsType, AppStateType} from "../../redux/redux-store";
 
-const mapStateToProps = (state: StateType) => {
+
+type MapDispatchType = {
+    sendMessageClick: () => void
+    newMessageChange: (body: string) => void
+}
+
+const mapStateToProps = (state: AppStateType): DialogsPageType => {
     return {
-        dialogsData: state.dialogsReducer.dialogsData,
-        messagesData: state.dialogsReducer.messagesData,
-        newMessageBody: state.dialogsReducer.newMessageBody
+        dialogsData: state.dialogsPage.dialogsData,
+        messagesData: state.dialogsPage.messagesData,
+        newMessageBody: state.dialogsPage.newMessageBody
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionsType>) => {
+const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchType => {
     return {
         sendMessageClick: () => dispatch(sendMessageAC()),
         newMessageChange: (body: string) => dispatch(updateNewMessageBodyAC(body))

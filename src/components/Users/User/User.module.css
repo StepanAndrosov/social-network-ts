@@ -1,0 +1,69 @@
+.User {
+    width: 250px;
+    border-radius: 50px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    background-color: darkgray;
+}
+
+.name {
+    padding: 5px;
+    color: navy;
+}
+
+.status {
+    font-size: 18px;
+    font-weight: bold;
+    color: blueviolet;
+}
+
+.city {
+    color: darkslateblue;
+}
+
+.btnUnFollow {
+    color: navy;
+    padding: 3px;
+    border: 1px solid azure;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    margin: 5px;
+}
+
+.btnUnFollow:hover {
+    border: 1px solid navy;
+    background-color: rgba(139, 0, 0, 0.3);
+}
+
+.btnFollow {
+    color: navy;
+    padding: 3px;
+    border: 1px solid azure;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    margin: 5px;
+}
+
+.btnFollow:hover {
+    border: 1px solid navy;
+    background-color: rgba(5, 238, 17, 0.3);
+}
+
+.avaBlock {
+    background-color: gray;
+    border-radius: 20px;
+    border: 2px solid azure;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ava {
+    margin: 5px;
+    width: 80px;
+    border: 2px solid navy;
+    border-radius: 50px;
+}

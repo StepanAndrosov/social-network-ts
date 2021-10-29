@@ -1,6 +1,8 @@
 import {addPostAC, profileReducer, updateNewPostTextAC} from "../redux/profile-reducer";
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "../redux/dialogs-reducer";
 
+
+
 type MessageType = {
     id: number
     message: string
@@ -28,13 +30,12 @@ type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-
-export type ActionsType = ReturnType<typeof addPostAC>
+type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
@@ -42,7 +43,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const storeStudy: StoreType = {
+const storeStudy: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -84,6 +85,8 @@ export const storeStudy: StoreType = {
         this._callSubscriber()
     }
 }
+
+
 
 
 
