@@ -21,10 +21,10 @@ export type UserType = {
 
 const initialState = {
     users: [
-        // {id: 1, followed: true, name: "Candyman", status: "I have a big hook", location: {city: "NewYork", country: "USA"}, photos: {small:candymanLogo, large:null}, alt: 'candyman logo'},
-        // {id: 2, followed: true, name: "Werewolf", status: "I love sheeps", location: {city: "Paris", country: "France"}, photos: {small:werewolfLogo, large:null}, alt: 'werewolf logo'},
-        // {id: 3, followed: true, name: "Dracula", status: "I love red whine", location: {city: "Bucharest", country: "Romania"}, photos: {small:draculaLogo, large:null}, alt: 'dracula logo'},
-        // {id: 4, followed: true, name: "Mummy", status: "Wooo-ooo", location: {city: "Sakkara", country: "Egypt"}, photos: {small:mummyLogo, large:null}, alt: 'mummy logo'}
+        {id: 1, followed: true, name: "Candyman", status: "I have a big hook", location: {city: "NewYork", country: "USA"}, photos: {small:candymanLogo, large:null}, alt: 'candyman logo'},
+        {id: 2, followed: true, name: "Werewolf", status: "I love sheeps", location: {city: "Paris", country: "France"}, photos: {small:werewolfLogo, large:null}, alt: 'werewolf logo'},
+        {id: 3, followed: true, name: "Dracula", status: "I love red whine", location: {city: "Bucharest", country: "Romania"}, photos: {small:draculaLogo, large:null}, alt: 'dracula logo'},
+        {id: 4, followed: true, name: "Mummy", status: "Wooo-ooo", location: {city: "Sakkara", country: "Egypt"}, photos: {small:mummyLogo, large:null}, alt: 'mummy logo'}
     ] as Array<UserType>
 }
 
