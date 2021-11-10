@@ -7,6 +7,8 @@ import mummyLogo from "./../accets/images/default-users/mummy.jpg"
 const FOLLOW = 'FOLLOW'
 //const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 export type UserType = {
     photos: any;
@@ -25,7 +27,10 @@ const initialState = {
         {id: 2, followed: true, name: "Werewolf", status: "I love sheeps", location: {city: "Paris", country: "France"}, photos: {small:werewolfLogo, large:null}, alt: 'werewolf logo'},
         {id: 3, followed: true, name: "Dracula", status: "I love red whine", location: {city: "Bucharest", country: "Romania"}, photos: {small:draculaLogo, large:null}, alt: 'dracula logo'},
         {id: 4, followed: true, name: "Mummy", status: "Wooo-ooo", location: {city: "Sakkara", country: "Egypt"}, photos: {small:mummyLogo, large:null}, alt: 'mummy logo'}
-    ] as Array<UserType>
+    ] as Array<UserType>,
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export type InitialStateType = typeof initialState
@@ -41,6 +46,16 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
             return {
                 ...state,
                 users: action.users
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.usersCount
             }
         default:
             return state
@@ -63,5 +78,17 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    } as const
+}
+export const setTotalUsersCountAC = (usersCount: number) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        usersCount
     } as const
 }
