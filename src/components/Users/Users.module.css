@@ -9,3 +9,7 @@
 .selectedPage {
     font-weight: bold;
 }
+.pagesSpan {
+    cursor: pointer;
+    padding: 3px;
+}
