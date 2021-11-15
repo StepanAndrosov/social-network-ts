@@ -1,14 +1,10 @@
 import {ActionsType} from "./redux-store";
-import candymanLogo from "./../accets/images/default-users/candy.jpg"
-import werewolfLogo from "./../accets/images/default-users/werewolf.jpg"
-import draculaLogo from "./../accets/images/default-users/dracula-halloween-icon.jpg"
-import mummyLogo from "./../accets/images/default-users/mummy.jpg"
 
 const FOLLOW = 'FOLLOW'
-//const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const IS_FETCHING = 'IS_FETCHING'
 
 export type UserType = {
     photos: any;
@@ -16,21 +12,17 @@ export type UserType = {
     followed: boolean
     name: string
     status: string
-    location: {city: string, country: string}
+    location: { city: string, country: string }
     userPhoto: string
     alt: string
 }
 
 const initialState = {
-    users: [
-        {id: 1, followed: true, name: "Candyman", status: "I have a big hook", location: {city: "NewYork", country: "USA"}, photos: {small:candymanLogo, large:null}, alt: 'candyman logo'},
-        {id: 2, followed: true, name: "Werewolf", status: "I love sheeps", location: {city: "Paris", country: "France"}, photos: {small:werewolfLogo, large:null}, alt: 'werewolf logo'},
-        {id: 3, followed: true, name: "Dracula", status: "I love red whine", location: {city: "Bucharest", country: "Romania"}, photos: {small:draculaLogo, large:null}, alt: 'dracula logo'},
-        {id: 4, followed: true, name: "Mummy", status: "Wooo-ooo", location: {city: "Sakkara", country: "Egypt"}, photos: {small:mummyLogo, large:null}, alt: 'mummy logo'}
-    ] as Array<UserType>,
+    users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export type InitialStateType = typeof initialState
@@ -57,6 +49,11 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
                 ...state,
                 totalUsersCount: action.usersCount
             }
+        case IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state
     }
@@ -68,12 +65,7 @@ export const followAC = (userId: number) => {
         userId
     } as const
 }
-// export const unfollowAC = (userId: number) => {
-//     return {
-//         type: UNFOLLOW,
-//         userId
-//     } as const
-// }
+
 export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
@@ -90,5 +82,11 @@ export const setTotalUsersCountAC = (usersCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         usersCount
+    } as const
+}
+export const setIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: IS_FETCHING,
+        isFetching
     } as const
 }
