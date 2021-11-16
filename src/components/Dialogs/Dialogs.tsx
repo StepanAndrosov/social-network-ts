@@ -2,24 +2,17 @@ import React, {ChangeEvent} from "react"
 import style from "./Dialogs.module.scss"
 import {DialogItem} from "./DialogItem/DialogItem"
 import {Message} from "./Message/Message"
-import {DialogType, MessageType} from "../../redux/dialogs-reducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPageType = {
-    dialogsData: Array<DialogType>
-    messagesData: Array<MessageType>
-    newMessageBody: string
-    sendMessageClick: () => void
-    newMessageChange: (body: string) => void
-}
 
-export const Dialogs: React.FC<DialogsPageType> = ({dialogsData, messagesData, newMessageBody, ...props}) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({dialogsData, messagesData, newMessageBody, ...props}) => {
 
     const onSendMessageClick = () => {
-        props.sendMessageClick()
+        props.sendMessage()
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.newMessageChange(body)
+        props.updateNewMessageBody(body)
     }
 
     return (

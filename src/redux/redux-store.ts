@@ -1,24 +1,25 @@
 import {combineReducers, createStore} from "redux";
-import {profileReducer, addPostAC, updateNewPostTextAC} from "./profile-reducer";
-import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {profileReducer, addPost, updateNewPostText, setUserProfile} from "./profile-reducer";
+import {dialogsReducer, sendMessage, updateNewMessageBody} from "./dialogs-reducer";
 import {
     usersReducer,
-    followAC,
-    setUsersAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setIsFetchingAC,
+    follow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setIsFetching,
 } from "./users-reducer";
 
-export type ActionsType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof updateNewMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
-    | ReturnType<typeof setIsFetchingAC>
+export type ActionsType = ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof updateNewMessageBody>
+    | ReturnType<typeof sendMessage>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof setIsFetching>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 

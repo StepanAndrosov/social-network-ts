@@ -55,13 +55,13 @@ export const dialogsReducer = (state = initialState, action: ActionsType): Dialo
     }
 }
 
-export const updateNewMessageBodyAC = (body: string) => {
+export const updateNewMessageBody = (body: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_BODY,
         body: body
     } as const
 }
-export const sendMessageAC = () => {
+export const sendMessage = () => {
     return {
         type: SEND_MESSAGE
     } as const

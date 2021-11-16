@@ -1,15 +1,15 @@
 import {UsersAPI} from "./UsersAPI";
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setIsFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setTotalUsersCount,
+    setUsers,
     UserType
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
-import {ActionsType, AppStateType} from "../../redux/redux-store";
+
+import {AppStateType} from "../../redux/redux-store";
 
 type MapDispatchType = {
     follow: (userId: number) => void
@@ -37,15 +37,10 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchType => {
-    return {
-        follow: (id: number) => dispatch(followAC(id)),
-        setUsers: (users: Array<UserType>) => dispatch(setUsersAC(users)),
-        setTotalUsersCount: (usersCount: number) => dispatch(setTotalUsersCountAC(usersCount)),
-        setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
-        setIsFetching: (isFetching: boolean) => dispatch(setIsFetchingAC(isFetching))
-    }
-}
-
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    setUsers,
+    setTotalUsersCount,
+    setCurrentPage,
+    setIsFetching
+})(UsersAPI)
