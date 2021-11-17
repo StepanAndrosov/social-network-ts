@@ -15,12 +15,13 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
                 <img className={style.screenImg} src={screenImg} alt="blade-runner-background"/>
             </div>
             <div>
-                <img className={style.profilePhoto} src={props.profile.photos.large} alt={`users photo - ${props.profile.fullName}`} />
+                <img className={style.profilePhoto} src={props.profile.photos.large} alt={`${props.profile.fullName}`} />
             </div>
             <div className={style.profileDescription}><b>{props.profile.aboutMe}</b></div>
             <div>
                 My contacts:
                 <div><span><b>vk: </b>{props.profile.contacts.vk}</span></div>
+                <div><span><b>github: </b>{props.profile.contacts.github}</span></div>
             </div>
         </div>
     )
