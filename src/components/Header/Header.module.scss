@@ -4,4 +4,16 @@
   .reactLogo {
     width: 65px;
   }
+  .loginBlock {
+    padding: 20px;
+    float: right;
+    a {
+        color: white;
+        text-decoration: none
+    }
+    .profileName {
+        color: white;
+        cursor: pointer;
+    }
+  }
 }

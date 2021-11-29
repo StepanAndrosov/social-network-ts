@@ -8,7 +8,9 @@ export class UsersAPI extends Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -19,7 +21,9 @@ export class UsersAPI extends Component<UsersPropsType> {
     onSetCurrentPage = (page: number) => {
         this.props.setIsFetching(true)
         this.props.setCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}` , {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.setIsFetching(false)
                 this.props.setUsers(response.data.items)

@@ -9,6 +9,7 @@ import {
     setTotalUsersCount,
     setIsFetching,
 } from "./users-reducer";
+import {authReducer, setUserData} from "./auth-reducer";
 
 export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
@@ -20,13 +21,19 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>
+    | ReturnType<typeof setUserData>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 export const store = createStore(rootReducer)
+
+
+// @ts-ignore
+window.store = store

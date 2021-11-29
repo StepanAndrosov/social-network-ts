@@ -44,8 +44,6 @@ class ProfileContainer extends Component<CommonPropsType> {
         let userId = this.props.match.params.userId === undefined
             ? '2'
             : this.props.match.params.userId
-
-        console.log(userId)
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
                 this.props.setUserProfile(response.data)

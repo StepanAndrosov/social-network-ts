@@ -95,7 +95,7 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
 export const addPost = (postText: string) => {
     return {
         type: ADD_POST,
-        postText: postText
+        postText
     } as const
 }
 export const updateNewPostText = (newText: string) => {
