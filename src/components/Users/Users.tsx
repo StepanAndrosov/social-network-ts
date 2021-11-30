@@ -10,6 +10,8 @@ type UsersFCType = {
     follow: (userId: number) => void
     pageSize: number
     totalUsersCount: number
+    toggleIsFollowingInProgress: (userId: number, isFetching: boolean) => void
+    followingInProgress: [] | Array<number>
 }
 
 export const Users: React.FC<UsersFCType> = (props) => {
@@ -40,6 +42,8 @@ export const Users: React.FC<UsersFCType> = (props) => {
                               status={item.status}
                               location={item.location}
                               isFollow={props.follow}
+                              isFollowingProgress={props.toggleIsFollowingInProgress}
+                              followingInProgress={props.followingInProgress}
                               photo={item.photos.small}
                               alt={item.alt}
                         />)

@@ -5,7 +5,7 @@ import {
     setCurrentPage,
     setIsFetching,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleIsFollowingInProgress,
     UserType
 } from "../../redux/users-reducer";
 
@@ -17,6 +17,7 @@ type MapDispatchType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (usersCount: number) => void
     setIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingInProgress: (userId: number, isFetching: boolean) => void
 }
 type MapStateType = {
     users: Array<UserType>
@@ -24,6 +25,7 @@ type MapStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: [] | Array<number>
 }
 
 export type UsersPropsType = MapDispatchType & MapStateType
@@ -34,7 +36,8 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 export const UsersContainer = connect(mapStateToProps, {
@@ -42,5 +45,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     setTotalUsersCount,
     setCurrentPage,
-    setIsFetching
+    setIsFetching,
+    toggleIsFollowingInProgress
 })(UsersAPI)

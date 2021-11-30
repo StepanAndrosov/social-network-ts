@@ -34,6 +34,8 @@ export class UsersAPI extends Component<UsersPropsType> {
                            currentPage={this.props.currentPage}
                            onSetCurrentPage={this.onSetCurrentPage}
                            follow={this.props.follow}
+                           toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
+                           followingInProgress={this.props.followingInProgress}
                     />
                 }
             </>
