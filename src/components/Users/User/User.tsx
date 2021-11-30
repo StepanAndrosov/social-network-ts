@@ -1,7 +1,7 @@
 import style from './User.module.css'
 import Morty from "./../../../accets/images/Morty_Smith.jpg"
 import {NavLink} from "react-router-dom"
-import axios from "axios";
+import {usersAPI} from "../../../api/api";
 
 type PropsType = {
     id: number
@@ -18,27 +18,17 @@ export const User = (props: PropsType) => {
 
     const toggleFollowUnfollow = () => {
         if (!props.followed) {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {}, {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "ac5021a6-6592-4dfc-bd91-07a05b477711"
-                }
-            })
-                .then(response => {
-                    if (response.data.resultCode === 0) {
+            usersAPI.follow(props.id)
+                .then(data => {
+                    if (data.resultCode === 0) {
                         props.isFollow(props.id)
                     }
                 })
         }
         if (props.followed) {
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,  {
-                withCredentials: true,
-                headers: {
-                    "API-KEY": "ac5021a6-6592-4dfc-bd91-07a05b477711"
-                }
-            })
-                .then(response => {
-                    if (response.data.resultCode === 0) {
+            usersAPI.unFollow(props.id)
+                .then(data => {
+                    if (data.resultCode === 0) {
                         props.isFollow(props.id)
                     }
                 })
