@@ -3,18 +3,17 @@ import style from "./Users.module.css"
 import React from "react";
 import {UserType} from "../../redux/users-reducer";
 
-type UsersFCType = {
+type UsersType = {
     users: Array<UserType>
     currentPage: number
     onSetCurrentPage: (page: number) => void
-    follow: (userId: number) => void
     pageSize: number
     totalUsersCount: number
-    toggleIsFollowingInProgress: (userId: number, isFetching: boolean) => void
     followingInProgress: [] | Array<number>
+    followUnfollowTC: (followed: boolean, id: number) => void
 }
 
-export const Users: React.FC<UsersFCType> = (props) => {
+export const Users: React.FC<UsersType> = (props) => {
     const pagesCount = (props.totalUsersCount / props.pageSize) <= 20 ? Math.ceil(props.totalUsersCount / props.pageSize) : 21
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -23,7 +22,7 @@ export const Users: React.FC<UsersFCType> = (props) => {
     return (
         <div>
             <div className={style.header}><h3>UsersList:</h3></div>
-            <div>
+            <div className={style.paginator}>
                 {pages.map(p => <span key={p}
                                             className={p === props.currentPage ? `${style.selectedPage} ${style.pagesSpan}` : style.pagesSpan}
                                             onClick={() => props.onSetCurrentPage(p)}
@@ -40,12 +39,9 @@ export const Users: React.FC<UsersFCType> = (props) => {
                               followed={item.followed}
                               name={item.name}
                               status={item.status}
-                              location={item.location}
-                              isFollow={props.follow}
-                              isFollowingProgress={props.toggleIsFollowingInProgress}
                               followingInProgress={props.followingInProgress}
                               photo={item.photos.small}
-                              alt={item.alt}
+                              followUnfollowTC={props.followUnfollowTC}
                         />)
                 })}
             </div>

@@ -1,44 +1,21 @@
 import style from './User.module.css'
 import Morty from "./../../../accets/images/Morty_Smith.jpg"
 import {NavLink} from "react-router-dom"
-import {usersAPI} from "../../../api/api";
 
 type PropsType = {
     id: number
     followed: boolean
     name: string
     status: string
-    location: { city: string, country: string }
-    isFollow: (id: number) => void
-    isFollowingProgress: (userId: number, isFetching: boolean) => void
-    followingInProgress: [] | Array<number>
     photo: any
-    alt: string
+    followingInProgress: [] | Array<number>
+    followUnfollowTC: (followed: boolean, id: number) => void
 }
 
 export const User = (props: PropsType) => {
 
     const toggleFollowUnfollow = () => {
-        if (!props.followed) {
-            props.isFollowingProgress(props.id, true)
-            usersAPI.follow(props.id)
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        props.isFollow(props.id)
-                        props.isFollowingProgress(props.id, false)
-                    }
-                })
-        }
-        if (props.followed) {
-            props.isFollowingProgress(props.id, true)
-            usersAPI.unFollow(props.id)
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        props.isFollow(props.id)
-                        props.isFollowingProgress(props.id, false)
-                    }
-                })
-        }
+        props.followUnfollowTC(props.followed, props.id)
     }
 
     return (
