@@ -17,6 +17,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <div>
                 <img className={style.profilePhoto} src={props.profile.photos.large} alt={`${props.profile.fullName}`} />
             </div>
+            <div className={style.profileName}><span>My name: <b>{props.profile.fullName}</b></span></div>
             <div className={style.profileDescription}><b>{props.profile.aboutMe}</b></div>
             <div>
                 My contacts:
