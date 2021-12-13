@@ -69,6 +69,8 @@ const initialState: ProfilePageType = {
     }
 }
 
+type ProfileType = typeof initialState.profile
+
 export const profileReducer = (state = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
@@ -106,7 +108,7 @@ export const updateNewPostText = (newText: string) => {
         newText: newText
     } as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile

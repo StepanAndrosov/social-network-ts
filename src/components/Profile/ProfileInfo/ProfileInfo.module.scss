@@ -1,13 +1,26 @@
 .ProfileInfo {
+    padding: 20px;
+    min-height: 500px;
+    color: white;
+    background-image: url(../../../accets/images/screen.jpg);
+    background-position: cover;
   .screenImg {
     margin: 10px;
     width: 550px;
   }
-
+    .profileName, .myContacts, .profileName{
+    margin-top: 10px;
+    margin-left: 10px;
+    }
   .profileDescription {
     padding: 10px;
   }
   .profilePhoto {
-    max-width: 250px;
+      margin-left: 10px;
+      border-radius: 20px;
+      max-width: 250px;
   }
+}
+.ProfileStatus{
+    margin-left: 10px;
 }
