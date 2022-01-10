@@ -16,7 +16,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             </div>
             <ProfileStatus status={props.profile.aboutMe}/>
             <div className={style.profileName}><span>My name: <b>{props.profile.fullName}</b></span></div>
-            <div className={style.profileDescription}><b>{props.profile.aboutMe}</b></div>
             <div className={style.myContacts}>
                 My contacts:
                 <div><span><b>vk: </b>{props.profile.contacts.vk}</span></div>

@@ -12,9 +12,6 @@
     margin-top: 10px;
     margin-left: 10px;
     }
-  .profileDescription {
-    padding: 10px;
-  }
   .profilePhoto {
       margin-left: 10px;
       border-radius: 20px;
@@ -23,4 +20,9 @@
 }
 .ProfileStatus{
     margin-left: 10px;
+    span {
+    color: azure;
+    text-decoration: underline;
+    cursor: pointer;
+    }
 }
