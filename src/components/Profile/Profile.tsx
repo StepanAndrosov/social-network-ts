@@ -2,36 +2,19 @@ import style from "./Profile.module.scss"
 import React from "react"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "../../redux/profile-reducer";
 
 export type ProfileInfoType = {
-profile: {
-    aboutMe: null | string
-    contacts: {
-        facebook: null | string
-        website: null | string
-        vk: null | string
-        twitter: null | string
-        instagram: null | string
-        youtube: null | string
-        github: null | string
-        mainLink: null | string
-    },
-    lookingForAJob: boolean
-    lookingForAJobDescription: null | string
-    fullName: string
-    userId: number
-    photos: {
-        small: string
-        large: string
-    }
-}
+    profile: ProfileType
+    status: string | null
+    updateStatus: (status: string | null) => void
 }
 
 export const Profile: React.FC<ProfileInfoType> = (props) => {
     return (
         <div className={style.Profile}>
-            <ProfileInfo profile={props.profile}/>
-            <MyPostsContainer  />
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <MyPostsContainer/>
         </div>
     )
 }

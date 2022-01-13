@@ -1,6 +1,6 @@
 import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunkMiddleware from "redux-thunk"
-import {profileReducer, addPost, updateNewPostText, setUserProfile} from "./profile-reducer";
+import {profileReducer, addPost, updateNewPostText, setUserProfile, setStatus} from "./profile-reducer";
 import {dialogsReducer, sendMessage, updateNewMessageBody} from "./dialogs-reducer";
 import {
     usersReducer,
@@ -19,6 +19,7 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof sendMessage>
     | ReturnType<typeof follow>
     | ReturnType<typeof setUsers>
+    | ReturnType<typeof setStatus>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>

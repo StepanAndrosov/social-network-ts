@@ -14,7 +14,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <div className={style.profilePhoto}>
                 <img  src={props.profile.photos.large} alt={`${props.profile.fullName}`} />
             </div>
-            <ProfileStatus status={props.profile.aboutMe}/>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
             <div className={style.profileName}><span>My name: <b>{props.profile.fullName}</b></span></div>
             <div className={style.myContacts}>
                 My contacts:
