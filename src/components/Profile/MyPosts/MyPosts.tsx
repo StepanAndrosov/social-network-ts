@@ -1,50 +1,57 @@
-import React, {createRef} from "react";
+import React from "react";
 import style from "./MyPosts.module.scss"
 import {Post} from "./Post/Post"
 import {PostType} from "../../../redux/profile-reducer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type MyPostsPropsType = {
     postsData: Array<PostType>
     newPostText: string
     addPost: (text: string) => void
-    updateNewPostText: (text: string) => void
 }
+
+
+type TextareaPostType = {
+    newPostText: string
+}
+
+const AddPostForm: React.FC<InjectedFormProps<TextareaPostType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field
+                name={'newPostText'}
+                component={'textarea'}
+                placeholder={"It is a crazy FLUX!"}
+            />
+            <div>
+                <button>Add</button>
+            </div>
+        </form>
+    )
+}
+
+const AddPostFormRedux = reduxForm<TextareaPostType>({
+    form: 'postAddMessage'
+})(AddPostForm)
 
 export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
 
-    const newPostElement = createRef<HTMLTextAreaElement>()
-
-    const onAddPost = () => {
-        const current = newPostElement.current
-        if (current) {
-            props.addPost(current.value)
-        }
-    }
-    const onPostChange = () => {
-        const current = newPostElement.current
-        if (current) {
-            props.updateNewPostText(current.value)
-            current.value = ''
-        }
+    const onAddPost = (values: { newPostText: string }) => {
+        props.addPost(values.newPostText)
     }
 
     return (
         <div className={style.MyPosts}>
             <div className={style.postBlock}>
-                <div>my posts</div>
-                <div>
-                    <div><textarea ref={newPostElement}
-                                   onChange={onPostChange}
-                                   value={props.newPostText}/>
-                    </div>
-                    <div>
-                        <button onClick={onAddPost}>Add</button>
-                    </div>
-                </div>
+                <div>Add post</div>
+                <AddPostFormRedux onSubmit={onAddPost}/>
             </div>
             {
-                postsData.map(item => <Post key={item.id + item.message} id={item.id} message={item.message}
-                                            likesCount={item.likesCount}/>)
+                postsData.map(item => <Post key={item.id + item.message}
+                                            id={item.id}
+                                            message={item.message}
+                                            likesCount={item.likesCount}
+                />)
             }
         </div>
     )

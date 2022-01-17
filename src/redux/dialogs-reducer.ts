@@ -1,6 +1,5 @@
 import {ActionsType} from "./redux-store";
 
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 export type MessageType = {
@@ -14,7 +13,6 @@ export type DialogType = {
 export type DialogsPageType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
-    newMessageBody: string
 }
 
 const initialState: DialogsPageType = {
@@ -30,39 +28,25 @@ const initialState: DialogsPageType = {
         {id: 3, message: 'Where is my portal gun?'},
         {id: 4, message: 'Morty is jerk!'}
     ],
-    newMessageBody: ""
 }
-
 export const dialogsReducer = (state = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            }
         case SEND_MESSAGE:
             const newMessage: MessageType = {
                 id: Math.random() * 100,
-                message: state.newMessageBody
+                message: action.newMessageBody
             }
             return {
                 ...state,
-                newMessageBody: '',
                 messagesData: [...state.messagesData, {...newMessage}]
             }
         default:
             return state
     }
 }
-
-export const updateNewMessageBody = (body: string) => {
+export const sendMessage = (newMessageBody: string) => {
     return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-export const sendMessage = () => {
-    return {
-        type: SEND_MESSAGE
+        type: SEND_MESSAGE,
+        newMessageBody
     } as const
 }

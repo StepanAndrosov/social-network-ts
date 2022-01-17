@@ -14,7 +14,7 @@ export const Profile: React.FC<ProfileInfoType> = (props) => {
     return (
         <div className={style.Profile}>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <MyPostsContainer/>
+            <MyPostsContainer />
         </div>
     )
 }

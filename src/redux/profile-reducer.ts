@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
@@ -87,11 +86,6 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
                 postsData: [{...newPost}, ...state.postsData],
                 newPostText: ''
             }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
-            }
         case SET_STATUS:
             return {
                 ...state,
@@ -108,12 +102,6 @@ export const addPost = (postText: string) => {
     return {
         type: ADD_POST,
         postText
-    } as const
-}
-export const updateNewPostText = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {
