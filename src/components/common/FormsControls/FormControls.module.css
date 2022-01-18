@@ -1,0 +1,15 @@
+ .FormBlock{
+}
+.Textarea {
+    padding: 10px;
+}
+.error textarea,
+.error input {
+    border: 2px solid red;
+}
+
+.error span {
+    width: 100%;
+    color: red;
+    text-align: center;
+}

@@ -3,14 +3,13 @@
     padding: 10px 40px 40px 40px;
 }
 input {
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 .InputTextBlock {
     border-radius: 5px;
     width: 100%;
 }
 input[type=text]{
-    height: 32px;
     border-radius: 5px;
     border: 1px solid #141414;
     padding-left: 15px;
