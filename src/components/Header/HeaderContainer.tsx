@@ -1,7 +1,7 @@
 import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {setUserDataTC} from "../../redux/auth-reducer";
+import {logoutTC, setUserDataTC} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
 
 type MapStateToPropsType = {
@@ -12,6 +12,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchType = {
     setUserDataTC: () => void
+    logoutTC: () => void
 }
 type PropsType = MapStateToPropsType & MapDispatchType
 
@@ -34,4 +35,4 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
-export default connect(mapStateToProps, {setUserDataTC})(HeaderContainer)
+export default connect(mapStateToProps, {setUserDataTC, logoutTC})(HeaderContainer)

@@ -23,15 +23,15 @@ export const authReducer = (state = initialState, action: ActionsType): AuthType
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.isAuth
             }
         default:
             return state
     }
 }
 
-export const setUserData = (userId: null | string, email: null | string, login: null | string) => {
-    return {type: SET_USER_DATA, data: {userId, email, login}} as const
+export const setUserData = (userId: null | string, email: null | string, login: null | string, isAuth: boolean) => {
+    return {type: SET_USER_DATA, data: {userId, email, login}, isAuth} as const
 }
 
 export const setUserDataTC = () => (dispatch: Dispatch<ActionsType>) => {
@@ -39,7 +39,30 @@ export const setUserDataTC = () => (dispatch: Dispatch<ActionsType>) => {
         .then(response => {
             if (response.resultCode === 0) {
                 const {id, login, email} = response.data
-                dispatch(setUserData(id, email, login))
+                dispatch(setUserData(id, email, login, true))
+            }
+        })
+}
+
+export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<ActionsType>) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            if (response.resultCode === 0) {
+                authAPI.authMe()
+                    .then(response => {
+                        if (response.resultCode === 0) {
+                            const {id, login, email} = response.data
+                            dispatch(setUserData(id, email, login, true))
+                        }
+                    })
+            }
+        })
+}
+export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.resultCode === 0) {
+                dispatch(setUserData(null, null, null, false))
             }
         })
 }

@@ -8,6 +8,7 @@ type HeaderType = {
     email: null | string
     login: null | string
     isAuth: boolean
+    logoutTC: () => void
 }
 
 export const Header: React.FC<HeaderType> = (props) => {
@@ -18,8 +19,9 @@ export const Header: React.FC<HeaderType> = (props) => {
 
                 <div className={style.loginBlock}>
                     {
-                        props.isAuth ? <span className={style.profileName}>{props.login}</span> :
-                        <NavLink to={'/login'}>Login</NavLink>
+                        props.isAuth
+                            ? <div className={style.profileName}><div>{props.login}</div> <button onClick={props.logoutTC}>Logout</button></div>
+                            : <NavLink to={'/login'}>Login</NavLink>
                     }
                 </div>
             </header>
