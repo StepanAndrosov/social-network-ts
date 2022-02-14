@@ -4,7 +4,7 @@ import reactLogo from "../../accets/images/react.png"
 import style from "./Header.module.scss"
 
 type HeaderType = {
-    userId: null | string
+    userId: null | number
     email: null | string
     login: null | string
     isAuth: boolean

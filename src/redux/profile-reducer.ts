@@ -1,6 +1,6 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -11,7 +11,6 @@ export type PostType = {
     message: string
     likesCount: number
 }
-
 export type ProfilePageType = {
     postsData: Array<PostType>
     newPostText: string
@@ -116,12 +115,11 @@ export const setStatus = (status: string | null) => {
         status
     } as const
 }
-export const getStatusTC = (id: string | undefined) => (dispatch: Dispatch<ActionsType>) => {
+export const getStatusTC = (id: number | undefined) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getStatus(id).then(response => {
         dispatch(setStatus(response))
     })
 }
-
 export const updateStatusTC = (status: string | null) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.updateStatus(status)
         .then(response => {
@@ -130,8 +128,8 @@ export const updateStatusTC = (status: string | null) => (dispatch: Dispatch<Act
             }
         })
 }
-export const setUserProfileTC = (id: string | undefined) => (dispatch: Dispatch<ActionsType>) => {
-    usersAPI.getProfile(id)
+export const setUserProfileTC = (id: number | undefined) => (dispatch: Dispatch<ActionsType>) => {
+    profileAPI.getProfile(id)
         .then(data => {
             dispatch(setUserProfile(data))
         })

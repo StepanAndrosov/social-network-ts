@@ -5,14 +5,15 @@ import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {getStatusTC, ProfileType, setUserProfileTC, updateStatusTC} from "../../redux/profile-reducer";
 
-
 type MapStateToPropsType = {
     profile: ProfileType
     status: string | null
+    authorizedUser: number | null
+    auth: boolean
 }
 type MapDispatchType = {
-    setUserProfileTC: (userId: string | undefined) => void
-    getStatusTC: (userId: string | undefined) => void
+    setUserProfileTC: (userId: number | undefined) => void
+    getStatusTC: (userId: number | undefined) => void
     updateStatusTC: (status: string | null) => void
 }
 type PropsType = MapStateToPropsType & MapDispatchType
@@ -25,8 +26,9 @@ class ProfileContainer extends Component<CommonPropsType> {
 
     componentDidMount(){
         let userId = this.props.match.params.userId === undefined
-            ? '15114'
-            : this.props.match.params.userId
+            ?  this.props.authorizedUser || 15114
+            : Number(this.props.match.params.userId)
+
         this.props.setUserProfileTC(userId)
         this.props.getStatusTC(userId)
     }
@@ -40,7 +42,9 @@ class ProfileContainer extends Component<CommonPropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUser: state.auth.userId,
+        auth: state.auth.isAuth
     }
 }
 

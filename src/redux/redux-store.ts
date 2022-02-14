@@ -2,7 +2,7 @@ import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunkMiddleware from "redux-thunk"
 import {profileReducer, addPost, setUserProfile, setStatus} from "./profile-reducer";
 import {dialogsReducer, sendMessage} from "./dialogs-reducer";
-import { reducer as formReducer } from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
 import {
     usersReducer,
     follow,
@@ -10,8 +10,9 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setIsFetching, toggleIsFollowingInProgress,
-} from "./users-reducer";
+} from "./users/users-reducer";
 import {authReducer, setUserData} from "./auth-reducer";
+import {appReducer, setInitializedAC} from "./app-reducer";
 
 export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
@@ -24,6 +25,7 @@ export type ActionsType = ReturnType<typeof addPost>
     | ReturnType<typeof setIsFetching>
     | ReturnType<typeof toggleIsFollowingInProgress>
     | ReturnType<typeof setUserData>
+    | ReturnType<typeof setInitializedAC>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
@@ -32,6 +34,7 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer
 })
 

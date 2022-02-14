@@ -1,5 +1,5 @@
-import {ActionsType} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {ActionsType} from "../redux-store";
+import {usersAPI} from "../../api/api";
 import {Dispatch} from "redux";
 
 const FOLLOW = 'FOLLOW'
