@@ -39,7 +39,6 @@ export class ProfileStatus extends React.Component<PropsStatusType> {
     }
 
     render() {
-        console.log('render')
         return (
             <div className={style.ProfileStatus}>
                 {!this.state.editMode &&

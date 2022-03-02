@@ -11,8 +11,6 @@ type MyPostsPropsType = {
     newPostText: string
     addPost: (text: string) => void
 }
-
-
 type TextareaPostType = {
     newPostText: string
 }
@@ -39,12 +37,10 @@ const AddPostFormRedux = reduxForm<TextareaPostType>({
     form: 'postAddMessage'
 })(AddPostForm)
 
-export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
-
+export const MyPosts: React.FC<MyPostsPropsType> = React.memo(({postsData}, props) => {
     const onAddPost = (values: { newPostText: string }) => {
         props.addPost(values.newPostText)
     }
-
     return (
         <div className={style.MyPosts}>
             <div className={style.postBlock}>
@@ -52,12 +48,13 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({postsData, ...props}) => {
                 <AddPostFormRedux onSubmit={onAddPost}/>
             </div>
             {
-                postsData.map(item => <Post key={item.id + item.message}
-                                            id={item.id}
-                                            message={item.message}
-                                            likesCount={item.likesCount}
-                />)
+                postsData.map(item =>
+                    <Post key={item.id + item.message}
+                          id={item.id}
+                          message={item.message}
+                          likesCount={item.likesCount}
+                    />)
             }
         </div>
     )
-}
+})
