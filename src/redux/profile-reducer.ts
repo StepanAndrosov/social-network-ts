@@ -5,6 +5,7 @@ import {profileAPI} from "../api/api";
 const ADD_POST = "ADD-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const DELETE_POST = "DELETE-POST"
 
 export type PostType = {
     id: number
@@ -85,6 +86,8 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
                 postsData: [{...newPost}, ...state.postsData],
                 newPostText: ''
             }
+        case DELETE_POST:
+            return {...state, postsData: state.postsData.filter(p => p.id !== action.id)}
         case SET_STATUS:
             return {
                 ...state,
@@ -96,25 +99,12 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
             return state
     }
 }
-
-export const addPost = (postText: string) => {
-    return {
-        type: ADD_POST,
-        postText
-    } as const
-}
-export const setUserProfile = (profile: ProfileType) => {
-    return {
-        type: SET_USER_PROFILE,
-        profile
-    } as const
-}
-export const setStatus = (status: string | null) => {
-    return {
-        type: SET_STATUS,
-        status
-    } as const
-}
+// actions
+export const addPost = (postText: string) => ({type: ADD_POST, postText} as const)
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+export const setStatus = (status: string | null) => ({type: SET_STATUS, status} as const)
+export const deletePost = (id: number) => ({type:DELETE_POST, id} as const)
+//thunks
 export const getStatusTC = (id: number | undefined) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getStatus(id).then(response => {
         dispatch(setStatus(response))

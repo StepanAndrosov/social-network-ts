@@ -21,7 +21,6 @@ type MapDispatchType = {
 type PropsType = MapDispatchType & MapStateToProps
 
 class App extends React.Component<PropsType> {
-
     componentDidMount() {
         this.props.initializeAppTC()
     }
@@ -35,18 +34,26 @@ class App extends React.Component<PropsType> {
                     <HeaderContainer/>
                     <Nav/>
                     <div className={style.Main}>
-                        <Route path='/profile/:userId?'
-                               render={() => <ProfileContainer/>
-                               }/>
-                        <Route path='/dialogs'
-                               render={() => <DialogsContainer/>
-                               }/>
-                        <Route path='/users'
-                               render={() => <UsersContainer/>
-                               }/>
-                        <Route path='/login'
-                               render={() => <Login/>
-                               }/>
+                        <Route
+                            path='/profile/:userId?'
+                            render={() => <ProfileContainer/>
+                            }
+                        />
+                        <Route
+                            path='/dialogs'
+                            render={() => <DialogsContainer/>
+                            }
+                        />
+                        <Route
+                            path='/users'
+                            render={() => <UsersContainer/>
+                            }
+                        />
+                        <Route
+                            path='/login'
+                            render={() => <Login/>
+                            }
+                        />
                     </div>
                 </div>
             </BrowserRouter>

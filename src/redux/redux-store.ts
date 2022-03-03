@@ -1,6 +1,6 @@
 import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunkMiddleware from "redux-thunk"
-import {profileReducer, addPost, setUserProfile, setStatus} from "./profile-reducer";
+import {profileReducer, addPost, setUserProfile, setStatus, deletePost} from "./profile-reducer";
 import {dialogsReducer, sendMessage} from "./dialogs-reducer";
 import {reducer as formReducer} from 'redux-form'
 import {
@@ -14,7 +14,9 @@ import {
 import {authReducer, setUserData} from "./auth-reducer";
 import {appReducer, setInitializedAC} from "./app-reducer";
 
-export type ActionsType = ReturnType<typeof addPost>
+export type ActionsType =
+    | ReturnType<typeof addPost>
+    | ReturnType<typeof deletePost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof sendMessage>
     | ReturnType<typeof follow>
