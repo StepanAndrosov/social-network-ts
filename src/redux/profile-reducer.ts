@@ -2,10 +2,10 @@ import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
-const ADD_POST = "ADD-POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_STATUS = "SET_STATUS"
-const DELETE_POST = "DELETE-POST"
+const ADD_POST = "profile/ADD-POST"
+const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
+const SET_STATUS = "profile/SET_STATUS"
+const DELETE_POST = "profile/DELETE-POST"
 
 export type PostType = {
     id: number
@@ -103,24 +103,19 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
 export const addPost = (postText: string) => ({type: ADD_POST, postText} as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string | null) => ({type: SET_STATUS, status} as const)
-export const deletePost = (id: number) => ({type:DELETE_POST, id} as const)
+export const deletePost = (id: number) => ({type: DELETE_POST, id} as const)
 //thunks
-export const getStatusTC = (id: number | undefined) => (dispatch: Dispatch<ActionsType>) => {
-    profileAPI.getStatus(id).then(response => {
-        dispatch(setStatus(response))
-    })
+export const getStatusTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
+    const response = await profileAPI.getStatus(id)
+    dispatch(setStatus(response))
 }
-export const updateStatusTC = (status: string | null) => (dispatch: Dispatch<ActionsType>) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        })
+export const updateStatusTC = (status: string | null) => async (dispatch: Dispatch<ActionsType>) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
-export const setUserProfileTC = (id: number | undefined) => (dispatch: Dispatch<ActionsType>) => {
-    profileAPI.getProfile(id)
-        .then(data => {
-            dispatch(setUserProfile(data))
-        })
+export const setUserProfileTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
+    const data = await profileAPI.getProfile(id)
+    dispatch(setUserProfile(data))
 }

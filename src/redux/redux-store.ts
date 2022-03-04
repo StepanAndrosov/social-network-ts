@@ -5,7 +5,7 @@ import {dialogsReducer, sendMessage} from "./dialogs-reducer";
 import {reducer as formReducer} from 'redux-form'
 import {
     usersReducer,
-    follow,
+    isFollow,
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
@@ -19,7 +19,7 @@ export type ActionsType =
     | ReturnType<typeof deletePost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof sendMessage>
-    | ReturnType<typeof follow>
+    | ReturnType<typeof isFollow>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof setCurrentPage>
@@ -39,9 +39,6 @@ const rootReducer = combineReducers({
     app: appReducer,
     form: formReducer
 })
-
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-
-
 // @ts-ignore
 window.store = store

@@ -1,6 +1,6 @@
 import {ActionsType} from "./redux-store";
 
-const SEND_MESSAGE = "SEND_MESSAGE"
+const SEND_MESSAGE = "dialog/SEND_MESSAGE"
 
 export type MessageType = {
     id: number
@@ -44,9 +44,5 @@ export const dialogsReducer = (state = initialState, action: ActionsType): Dialo
             return state
     }
 }
-export const sendMessage = (newMessageBody: string) => {
-    return {
-        type: SEND_MESSAGE,
-        newMessageBody
-    } as const
-}
+export const sendMessage = (newMessageBody: string) =>
+    ({type: SEND_MESSAGE, newMessageBody} as const)

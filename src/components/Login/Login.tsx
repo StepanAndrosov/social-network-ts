@@ -22,11 +22,12 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
                 <Field type={'text'} component={Input} validate={[required]} name={'email'} placeholder={'Email'}/>
             </div>
             <div className={style.InputTextBlock}>
-                <Field type={'text'} component={Input} validate={[required]} name={'password'} placeholder={'Password'}/>
+                <Field type={'text'} component={Input} validate={[required]} name={'password'}
+                       placeholder={'Password'}/>
             </div>
-            <div>
-                <Field id={'rememberMe'} component={'input'} name={'rememberMe'} type={'checkbox'}/> <label htmlFor={'rememberMe'}>remember me</label>
-            </div>
+            <Field id={'rememberMe'} component={'input'} name={'rememberMe'} type={'checkbox'}/> <label
+            htmlFor={'rememberMe'}>remember me</label>
+
             {props.error && <div className={errorStyle.summaryError}>
                 {props.error}
             </div>}
@@ -41,17 +42,17 @@ export const LoginReduxForm = reduxForm<LoginFormType>({
 })(LoginForm)
 
 type LoginType = {
-    loginTC:(email: string, password: string, rememberMe: boolean) => void
+    loginTC: (email: string, password: string, rememberMe: boolean) => void
 }
 
 
- const Login: React.FC<LoginType> = ({loginTC}, props) => {
+const Login: React.FC<LoginType> = ({loginTC}, props) => {
     const onSubmit = (formData: LoginFormType) => {
         loginTC(formData.email, formData.password, formData.rememberMe)
     }
 
     if (props.isAuth) {
-        return <Redirect to={"/profile"} />
+        return <Redirect to={"/profile"}/>
     }
 
     return (
@@ -64,10 +65,10 @@ type LoginType = {
 type MapStateType = {
     isAuth: boolean
 }
-const mapStateToProps = (state: AppStateType): MapStateType  => {
+const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps,{loginTC} )(Login)
+export default connect(mapStateToProps, {loginTC})(Login)
