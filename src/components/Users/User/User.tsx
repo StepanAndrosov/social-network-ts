@@ -22,19 +22,28 @@ export const User = (props: PropsType) => {
         <div className={style.User}>
             <NavLink to={'/profile/' + props.id}>
                 <div className={style.avaBlock}>
-                    <div><h4 className={style.name}>{props.name}</h4></div>
-                    <div><img className={style.ava} src={props.photo != null ? props.photo : Morty}
-                              alt={"defaultAvatar"}/>
+                    <div>
+                        <h4 className={style.name}>{props.name}</h4>
+                    </div>
+                    <div>
+                        <img
+                            className={style.ava}
+                            src={props.photo != null ? props.photo : Morty}
+                            alt={"defaultAvatar"}/>
                     </div>
                 </div>
             </NavLink>
-            <span>my status: <span className={style.status}>{props.status}</span></span>
+            <span>
+                my status:
+                <span className={style.status}>{props.status}</span>
+            </span>
             <button
                 disabled={props.followingInProgress.some(id => id === props.id)}
                 className={props.followed ? style.btnUnFollow : style.btnFollow}
                 onClick={toggleFollowUnfollow}
             >
-                {props.followed ? 'unfollow' : 'follow'}</button>
+                {props.followed ? 'unfollow' : 'follow'}
+            </button>
         </div>
     )
 }

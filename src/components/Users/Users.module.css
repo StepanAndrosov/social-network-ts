@@ -6,10 +6,4 @@
 .header {
     padding-left: 30px;
 }
-.selectedPage {
-    font-weight: bold;
-}
-.pagesSpan {
-    cursor: pointer;
-    padding: 3px;
-}
+
