@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from "react";
-import style from "./ProfileInfo.module.scss"
+import style from "../ProfileInfo.module.scss"
 
 type PropsStatusType = {
     status: string | null
-    updateStatus: (status: string | null) => void
+    updateStatus?: (status: string | null) => void
 }
 
 export class ProfileStatus extends React.Component<PropsStatusType> {
@@ -22,6 +22,7 @@ export class ProfileStatus extends React.Component<PropsStatusType> {
         this.setState({
             editMode: false
         })
+        if(this.props.updateStatus)
         this.props.updateStatus(this.state.status)
     }
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {

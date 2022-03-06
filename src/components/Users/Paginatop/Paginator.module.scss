@@ -1,0 +1,23 @@
+.paginator {
+    span {
+        cursor: pointer;
+        padding: 2px;
+        color: black;
+    }
+    button {
+        cursor: pointer;
+        margin: 5px;
+        border-radius: 5px;
+        text-align: center;
+        border: none;
+        background-color: #4682b4;
+        color: #fff;
+    }
+    button:hover {
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, 0.2);
+    }
+}
+
+.selectedPage {
+    font-weight: bold;
+}

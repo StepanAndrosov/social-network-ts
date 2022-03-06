@@ -33,6 +33,7 @@ class App extends React.Component<PropsType> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className={style.Main}>
+                    
                     <Route
                         path='/profile/:userId?'
                         render={() => <ProfileContainer/>

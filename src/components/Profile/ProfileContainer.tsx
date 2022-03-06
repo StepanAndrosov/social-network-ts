@@ -14,7 +14,7 @@ type MapStateToPropsType = {
 type MapDispatchType = {
     setUserProfileTC: (userId: number | undefined) => void
     getStatusTC: (userId: number | undefined) => void
-    updateStatusTC: (status: string | null) => void
+    updateStatusTC?: (status: string | null) => void
 }
 type PropsType = MapStateToPropsType & MapDispatchType
 type PathParamsType = {
@@ -24,17 +24,21 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & PropsType
 
 class ProfileContainer extends Component<CommonPropsType> {
 
-    componentDidMount(){
+    componentDidMount() {
         let userId = this.props.match.params.userId === undefined
-            ?  this.props.authorizedUser || 15114
+            ? this.props.authorizedUser || 15114
             : Number(this.props.match.params.userId)
 
         this.props.setUserProfileTC(userId)
         this.props.getStatusTC(userId)
     }
+
     render() {
         return (
-            <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusTC}/>
+            <Profile
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateStatusTC}/>
         )
     }
 }

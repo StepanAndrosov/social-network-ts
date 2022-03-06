@@ -47,16 +47,16 @@ class UsersContainer extends Component<UsersPropsType> {
         return (
             <>
                 {
-                    this.props.isFetching ? <Preloader/> :
-                        <Users users={this.props.users}
-                               totalUsersCount={this.props.totalUsersCount}
-                               pageSize={this.props.pageSize}
-                               currentPage={this.props.currentPage}
-                               onSetCurrentPage={this.onSetCurrentPage}
-                               followingInProgress={this.props.followingInProgress}
-                               followUnfollowTC={this.props.followUnfollowTC}
-                        />
+                    this.props.isFetching ? <Preloader/> : null
                 }
+                <Users users={this.props.users}
+                       totalUsersCount={this.props.totalUsersCount}
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}
+                       onSetCurrentPage={this.onSetCurrentPage}
+                       followingInProgress={this.props.followingInProgress}
+                       followUnfollowTC={this.props.followUnfollowTC}
+                />
             </>
         )
     }

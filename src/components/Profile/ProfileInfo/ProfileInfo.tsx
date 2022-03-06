@@ -2,8 +2,7 @@ import style from "./ProfileInfo.module.scss"
 import React from "react"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileInfoType} from "../Profile";
-import {ProfileStatus} from "./ProfileStatus";
-
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     if (!props.profile) {

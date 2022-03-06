@@ -22,7 +22,7 @@ export const Users: React.FC<UsersType> = (props) => {
                 pageSize={props.pageSize}
                 currentPage={props.currentPage}
                 onSetCurrentPage={props.onSetCurrentPage}
-                totalUsersCount={props.totalUsersCount}
+                totalItemsCount={props.totalUsersCount}
             />
             <div className={style.Users}>
                 {
