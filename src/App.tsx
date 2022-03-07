@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import style from './App.module.scss'
 import {Nav} from "./components/Nav/Nav"
 import {Route} from "react-router-dom"
-import DialogsContainer from "./components/Dialogs/DialogsContainer"
+// import DialogsContainer from "./components/Dialogs/DialogsContainer"
 import UsersContainer from "./components/Users/UsersContainer"
 import ProfileContainer from "./components/Profile/ProfileContainer"
 import HeaderContainer from "./components/Header/HeaderContainer"
@@ -11,6 +11,9 @@ import {connect} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import {withSuspense} from "./hoc/whithSuspense";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 type MapStateToProps = {
     initialized: boolean
@@ -33,26 +36,21 @@ class App extends React.Component<PropsType> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className={style.Main}>
-                    
                     <Route
                         path='/profile/:userId?'
-                        render={() => <ProfileContainer/>
-                        }
+                        render={() => <ProfileContainer/>}
                     />
                     <Route
                         path='/dialogs'
-                        render={() => <DialogsContainer/>
-                        }
+                        render={withSuspense(DialogsContainer)}
                     />
                     <Route
                         path='/users'
-                        render={() => <UsersContainer/>
-                        }
+                        render={() => <UsersContainer/>}
                     />
                     <Route
                         path='/login'
-                        render={() => <Login/>
-                        }
+                        render={() => <Login/>}
                     />
                 </div>
             </div>
