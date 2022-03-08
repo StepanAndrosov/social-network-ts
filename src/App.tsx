@@ -1,8 +1,7 @@
-import React, {Suspense} from 'react'
+import React from 'react'
 import style from './App.module.scss'
 import {Nav} from "./components/Nav/Nav"
 import {Route} from "react-router-dom"
-// import DialogsContainer from "./components/Dialogs/DialogsContainer"
 import UsersContainer from "./components/Users/UsersContainer"
 import ProfileContainer from "./components/Profile/ProfileContainer"
 import HeaderContainer from "./components/Header/HeaderContainer"
