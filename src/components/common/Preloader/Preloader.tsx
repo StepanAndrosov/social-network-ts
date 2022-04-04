@@ -1,18 +1,15 @@
 import Loader from "../../../accets/images/Skateboarding.gif";
 import React from "react";
+import style from "./Preloader.module.css"
 
-const style = {
-    marginTop: "20px",
-    display: "flex",
-    justifyContent: "center",
-    "flex-direction": "column",
-    alignItems: "center"
-}
 export const Preloader = () => {
     return (
-        <div style={style}>
+        <div className={style.Preloader}>
             <div>learn react</div>
-            <img style={{maxWidth: '40px'}} src={Loader} alt={'loader-Skateboarding'}/>
+            <div>
+                <img style={{maxWidth: '40px'}} src={Loader} alt={'loader-Skateboarding'}/>
+            </div>
+
         </div>
     )
 }

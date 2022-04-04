@@ -24,13 +24,23 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & PropsType
 
 class ProfileContainer extends Component<CommonPropsType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId === undefined
             ? this.props.authorizedUser || 15114
             : Number(this.props.match.params.userId)
 
         this.props.setUserProfileTC(userId)
         this.props.getStatusTC(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<CommonPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
     }
 
     render() {
