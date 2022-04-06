@@ -6,6 +6,7 @@ const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_STATUS = "profile/SET_STATUS"
 const DELETE_POST = "profile/DELETE-POST"
+const SAVE_PHOTO_SUCCESS = "profile/SAVE_PHOTO_SUCCESS"
 
 export type PostType = {
     id: number
@@ -95,6 +96,8 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
             }
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
+        case SAVE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos} }
         default:
             return state
     }
@@ -104,6 +107,7 @@ export const addPost = (postText: string) => ({type: ADD_POST, postText} as cons
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string | null) => ({type: SET_STATUS, status} as const)
 export const deletePost = (id: number) => ({type: DELETE_POST, id} as const)
+export const savePhotoSuccess = (photos: {small: string, large: string}) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 //thunks
 export const getStatusTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await profileAPI.getStatus(id)
@@ -118,4 +122,11 @@ export const updateStatusTC = (status: string | null) => async (dispatch: Dispat
 export const setUserProfileTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
     const data = await profileAPI.getProfile(id)
     dispatch(setUserProfile(data))
+}
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.savePhoto(file)
+
+    if (res.data.resultCode === 0 ) {
+        dispatch(savePhotoSuccess(res.data.data))
+    }
 }

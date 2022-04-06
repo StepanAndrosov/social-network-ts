@@ -17,6 +17,10 @@ export type AuthDataType = {
     email: string
     login: string
 }
+type ProfilePhoto = {
+    small: string
+    large: string
+}
 export const authAPI = {
     authMe(){
         return instance.get<ResponseType<AuthDataType>>(`auth/me`)
@@ -63,5 +67,14 @@ export const profileAPI = {
     updateStatus(status: string | null){
         return instance.put(`profile/status`, {status})
             .then(response => response.data)
+    },
+    savePhoto(file: File) {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.put<ResponseType<ProfilePhoto>>('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }

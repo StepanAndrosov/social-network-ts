@@ -3,7 +3,7 @@ import {Component} from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {getStatusTC, ProfileType, setUserProfileTC, updateStatusTC} from "../../redux/profile-reducer";
+import {getStatusTC, ProfileType, setUserProfileTC, updateStatusTC, savePhoto} from "../../redux/profile-reducer";
 
 type MapStateToPropsType = {
     profile: ProfileType
@@ -15,6 +15,7 @@ type MapDispatchType = {
     setUserProfileTC: (userId: number | undefined) => void
     getStatusTC: (userId: number | undefined) => void
     updateStatusTC?: (status: string | null) => void
+    savePhoto: (file: File) => void
 }
 type PropsType = MapStateToPropsType & MapDispatchType
 type PathParamsType = {
@@ -38,7 +39,7 @@ class ProfileContainer extends Component<CommonPropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<CommonPropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if(this.props.match.params.userId !== prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
     }
@@ -46,9 +47,12 @@ class ProfileContainer extends Component<CommonPropsType> {
     render() {
         return (
             <Profile
+                savePhoto={this.props.savePhoto}
+                isOwner={!this.props.match.params.userId}
                 profile={this.props.profile}
                 status={this.props.status}
-                updateStatus={this.props.updateStatusTC}/>
+                updateStatus={this.props.updateStatusTC}
+            />
         )
     }
 }
@@ -67,5 +71,6 @@ const WithUrlDataComponent = withRouter(ProfileContainer)
 export default connect(mapStateToProps, {
     setUserProfileTC,
     getStatusTC,
-    updateStatusTC
+    updateStatusTC,
+    savePhoto
 })(WithUrlDataComponent)
