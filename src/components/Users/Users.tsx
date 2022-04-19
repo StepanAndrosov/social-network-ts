@@ -2,7 +2,7 @@ import {User} from "./User/User";
 import style from "./Users.module.css"
 import React from "react";
 import {UserType} from "../../redux/users/users-reducer";
-import {Paginator} from "./Paginatop/Paginator";
+import {Paginator} from "./Paginator/Paginator";
 
 type UsersType = {
     users: Array<UserType>

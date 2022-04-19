@@ -1,12 +1,13 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType, AppStateType} from "./redux-store";
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/api";
+import {profileAPI, ProfileType} from "../api/api";
 
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_STATUS = "profile/SET_STATUS"
 const DELETE_POST = "profile/DELETE-POST"
 const SAVE_PHOTO_SUCCESS = "profile/SAVE_PHOTO_SUCCESS"
+const SAVE_PROFILE_SUCCESS = "profile/SAVE_PROFILE_SUCCESS"
 
 export type PostType = {
     id: number
@@ -16,27 +17,7 @@ export type PostType = {
 export type ProfilePageType = {
     postsData: Array<PostType>
     newPostText: string
-    profile: {
-        aboutMe: null | string
-        contacts: {
-            facebook: null | string
-            website: null | string
-            vk: null | string
-            twitter: null | string
-            instagram: null | string
-            youtube: null | string
-            github: null | string
-            mainLink: null | string
-        },
-        lookingForAJob: boolean
-        lookingForAJobDescription: null | string
-        fullName: string
-        userId: number
-        photos: {
-            small: string
-            large: string
-        }
-    },
+    profile: ProfileType,
     status: string | null
 }
 
@@ -49,19 +30,19 @@ const initialState: ProfilePageType = {
     ],
     newPostText: "It is a crazy FLUX!",
     profile: {
-        aboutMe: null,
+        aboutMe: "",
         contacts: {
-            facebook: null,
-            website: null,
-            vk: null,
-            twitter: null,
-            instagram: null,
-            youtube: null,
-            github: null,
-            mainLink: null,
+            facebook: "",
+            website: "",
+            vk: "",
+            twitter: "",
+            instagram: "",
+            youtube: "",
+            github: "",
+            mainLink: "",
         },
         lookingForAJob: false,
-        lookingForAJobDescription: null,
+        lookingForAJobDescription: "",
         fullName: "",
         userId: 0,
         photos: {
@@ -71,8 +52,7 @@ const initialState: ProfilePageType = {
     },
     status: "",
 }
-
-export type ProfileType = typeof initialState.profile
+export type KeyofContactsType = keyof typeof initialState.profile.contacts
 
 export const profileReducer = (state = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
@@ -97,7 +77,9 @@ export const profileReducer = (state = initialState, action: ActionsType): Profi
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SAVE_PHOTO_SUCCESS:
-            return {...state, profile: {...state.profile, photos: action.photos} }
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        case SAVE_PROFILE_SUCCESS:
+            return {...state, profile: action.profile}
         default:
             return state
     }
@@ -107,26 +89,38 @@ export const addPost = (postText: string) => ({type: ADD_POST, postText} as cons
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string | null) => ({type: SET_STATUS, status} as const)
 export const deletePost = (id: number) => ({type: DELETE_POST, id} as const)
-export const savePhotoSuccess = (photos: {small: string, large: string}) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
+export const savePhotoSuccess = (photos: { small: string, large: string }) => ({
+    type: SAVE_PHOTO_SUCCESS,
+    photos
+} as const)
+export const saveProfileSuccess = (profile: ProfileType) => ({type: SAVE_PROFILE_SUCCESS, profile} as const)
 //thunks
 export const getStatusTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
     const response = await profileAPI.getStatus(id)
     dispatch(setStatus(response))
 }
 export const updateStatusTC = (status: string | null) => async (dispatch: Dispatch<ActionsType>) => {
-    const response = await profileAPI.updateStatus(status)
-    if (response.resultCode === 0) {
+    const res = await profileAPI.updateStatus(status)
+    if (res.resultCode === 0) {
         dispatch(setStatus(status))
     }
 }
-export const setUserProfileTC = (id: number | undefined) => async (dispatch: Dispatch<ActionsType>) => {
-    const data = await profileAPI.getProfile(id)
-    dispatch(setUserProfile(data))
+export const getUserProfile = (id: number | null) => async (dispatch: Dispatch) => {
+    const res = await profileAPI.getProfile(id)
+    dispatch(setUserProfile(res))
+
 }
+
 export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     const res = await profileAPI.savePhoto(file)
-
-    if (res.data.resultCode === 0 ) {
-        dispatch(savePhotoSuccess(res.data.data))
+    if (res.resultCode === 0) {
+        dispatch(savePhotoSuccess(res.data))
+    }
+}
+export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState:()=> AppStateType) => {
+    const userId = getState().auth.userId
+    const res = await profileAPI.saveProfile(profile)
+    if (res.resultCode === 0) {
+        dispatch(getUserProfile(userId))
     }
 }

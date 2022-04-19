@@ -12,6 +12,25 @@ export type ResponseType<D> = {
     messages: Array<string>,
     data: D
 }
+export type ProfileType = {
+    aboutMe: string
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: ProfilePhoto
+}
+
 export type AuthDataType = {
     id: number
     email: string
@@ -22,15 +41,15 @@ type ProfilePhoto = {
     large: string
 }
 export const authAPI = {
-    authMe(){
+    authMe() {
         return instance.get<ResponseType<AuthDataType>>(`auth/me`)
             .then(response => response.data)
     },
-    login(email: string, password: string, rememberMe: boolean = false){
+    login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post(`auth/login`, {email, password, rememberMe})
             .then(response => response.data)
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
             .then(response => response.data)
     },
@@ -48,23 +67,19 @@ export const usersAPI = {
     unFollow(userId: number) {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data)
-    },
-    getProfile(userId: number | undefined){
-        console.warn('Obsolete method. Please use profileAPI object')
-        return profileAPI.getProfile(userId)
     }
 }
 
 export const profileAPI = {
-    getProfile(userId: number | undefined){
-        return instance.get(`profile/${userId}`)
+    getProfile(userId: number | null) {
+        return instance.get<ProfileType>(`profile/${userId}`)
             .then(response => response.data)
     },
-    getStatus(userId: number | undefined){
+    getStatus(userId: number | undefined) {
         return instance.get(`profile/status/${userId}`)
             .then(response => response.data)
     },
-    updateStatus(status: string | null){
+    updateStatus(status: string | null) {
         return instance.put(`profile/status`, {status})
             .then(response => response.data)
     },
@@ -75,6 +90,10 @@ export const profileAPI = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
-    }
+        }).then(response => response.data)
+    },
+    saveProfile(profile: ProfileType) {
+        return instance.put<ResponseType<ProfileType>>('profile', profile)
+            .then(response => response.data)
+    },
 }

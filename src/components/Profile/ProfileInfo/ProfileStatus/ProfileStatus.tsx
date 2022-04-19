@@ -22,8 +22,8 @@ export class ProfileStatus extends React.Component<PropsStatusType> {
         this.setState({
             editMode: false
         })
-        if(this.props.updateStatus)
-        this.props.updateStatus(this.state.status)
+        if (this.props.updateStatus)
+            this.props.updateStatus(this.state.status)
     }
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
@@ -42,16 +42,23 @@ export class ProfileStatus extends React.Component<PropsStatusType> {
     render() {
         return (
             <div className={style.ProfileStatus}>
-                {!this.state.editMode &&
-                <div>
-                    <span onDoubleClick={this.activateEditMode}> <b> {this.props.status || 'No status'}</b> </span>
-                </div>
+                {
+                    !this.state.editMode &&
+                    <div>
+                    <span onDoubleClick={this.activateEditMode}>
+                        <b> {this.props.status || 'No status'}</b>
+                    </span>
+                    </div>
                 }
-                {this.state.editMode &&
-                <div>
-                    <input autoFocus onChange={this.onStatusChange} onBlur={this.deactivateEditMode}
-                           value={this.state.status ? this.state.status : ''}/>
-                </div>
+                {
+                    this.state.editMode &&
+                    <div>
+                        <input autoFocus
+                               onChange={this.onStatusChange}
+                               onBlur={this.deactivateEditMode}
+                               value={this.state.status ? this.state.status : ''}
+                        />
+                    </div>
                 }
             </div>
         )

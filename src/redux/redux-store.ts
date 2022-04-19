@@ -1,6 +1,14 @@
 import {combineReducers, createStore, applyMiddleware, compose} from "redux";
 import thunkMiddleware from "redux-thunk"
-import {profileReducer, addPost, setUserProfile, setStatus, deletePost, savePhotoSuccess} from "./profile-reducer";
+import {
+    profileReducer,
+    addPost,
+    setUserProfile,
+    setStatus,
+    deletePost,
+    savePhotoSuccess,
+    saveProfileSuccess
+} from "./profile-reducer";
 import {dialogsReducer, sendMessage} from "./dialogs-reducer";
 import {reducer as formReducer} from 'redux-form'
 import {
@@ -19,6 +27,7 @@ export type ActionsType =
     | ReturnType<typeof deletePost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof savePhotoSuccess>
+    | ReturnType<typeof saveProfileSuccess>
     | ReturnType<typeof sendMessage>
     | ReturnType<typeof isFollow>
     | ReturnType<typeof setUsers>
