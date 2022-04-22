@@ -8,7 +8,7 @@ import {ProfileType} from "../../api/api";
 export type ProfileInfoType = {
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<void>
     profile: ProfileType
     status: string | null
     updateStatus?: (status: string | null) => void

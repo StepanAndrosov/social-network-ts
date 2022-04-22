@@ -17,7 +17,7 @@ type MapDispatchType = {
     getStatusTC: (userId: number | undefined) => void
     updateStatusTC?: (status: string | null) => void
     savePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => void
+    saveProfile: (profile: ProfileType) => Promise<void>
 }
 type PropsType = MapStateToPropsType & MapDispatchType
 type PathParamsType = {

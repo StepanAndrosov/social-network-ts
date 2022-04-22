@@ -6,7 +6,7 @@ import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import ProfileImg from "../../../accets/images/profileImg.jpg"
 import {KeyofContactsType} from "../../../redux/profile-reducer";
 import {ProfileType} from "../../../api/api";
-import {ProfileDataFormType, ReduxProfileDataForm} from "./ProfileDataForm";
+import {ProfileDataFormType, ProfileEditForm} from "./ProfileDataForm";
 
 export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 
@@ -24,11 +24,11 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
     const onSubmit = (formData: ProfileDataFormType) => {
         props.saveProfile({
             ...formData,
-            contacts: props.profile.contacts,
             userId: props.profile.userId,
             photos: props.profile.photos
-        })
-        setEditMode(false)
+        }).then(
+            () => setEditMode(false)
+        )
     }
 
     return (
@@ -43,7 +43,10 @@ export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             {
                 editMode
-                    ? <ReduxProfileDataForm initialValues={props.profile} onSubmit={onSubmit}/>
+                    ? <ProfileEditForm
+                        initialValues={props.profile}
+                        onSubmit={onSubmit}
+                    />
                     : <ProfileData
                         profile={props.profile}
                         isOwner={props.isOwner}
@@ -94,13 +97,13 @@ const ProfileData: React.FC<PropsProfileDataType> = ({profile, isOwner, toEditMo
             <div className={style.myContacts}>
                 My contacts:
                 {
-                    Object.keys(profile.contacts).map((key) => {
-                            return <Contact
+                    Object.keys(profile.contacts).map((key) => (
+                            <Contact
                                 key={key}
                                 contactTitle={key}
                                 value={profile.contacts[key as KeyofContactsType]}
                             />
-                        }
+                        )
                     )
                 }
             </div>
