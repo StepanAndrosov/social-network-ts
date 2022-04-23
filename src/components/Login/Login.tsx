@@ -15,7 +15,11 @@ type LoginFormType = {
     rememberMe: boolean
 }
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
+type Props = {
+    captchaUrl: null | string
+}
+
+const LoginForm: React.FC<Props & InjectedFormProps<LoginFormType, Props>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style.Login}>
             <div className={style.InputTextBlock}>
@@ -27,7 +31,9 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
             </div>
             <Field id={'rememberMe'} component={'input'} name={'rememberMe'} type={'checkbox'}/> <label
             htmlFor={'rememberMe'}>remember me</label>
-
+            {
+                props.captchaUrl && <img src={props.captchaUrl} />
+            }
             {
                 props.error
                 && <div className={errorStyle.summaryError}>
@@ -40,7 +46,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
         </form>
     )
 }
-export const LoginReduxForm = reduxForm<LoginFormType>({
+export const LoginReduxForm = reduxForm<LoginFormType, Props>({
     form: 'login'
 })(LoginForm)
 
@@ -61,15 +67,17 @@ const Login: React.FC<LoginType> = ({loginTC}, props) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     )
 }
 type MapStateType = {
+    captchaUrl: null | string
     isAuth: boolean
 }
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
+        captchaUrl: state.auth.captchaUrl,
         isAuth: state.auth.isAuth
     }
 }

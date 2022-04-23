@@ -1,16 +1,17 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {FormAction} from "redux-form/lib/actions";
 
 const SET_USER_DATA = "auth/SET_USER_DATA"
+const GET_CAPTCHA_URL_SUCCESS = "auth/GET_CAPTCHA_URL_SUCCESS"
 
 const initialState = {
     isAuth: false,
     userId: null as (number | null),
     email: null as (string | null),
-    login: null as (string | null)
+    login: null as (string | null),
+    captchaUrl: null as (string | null)
 }
 
 export type AuthType = typeof initialState
@@ -23,6 +24,11 @@ export const authReducer = (state = initialState, action: ActionsType): AuthType
                 ...action.data,
                 isAuth: action.isAuth
             }
+        case GET_CAPTCHA_URL_SUCCESS:
+            return {
+                ...state,
+                captchaUrl: action.url
+            }
         default:
             return state
     }
@@ -30,6 +36,8 @@ export const authReducer = (state = initialState, action: ActionsType): AuthType
 //actions
 export const setUserData = (userId: null | number, email: null | string, login: null | string, isAuth: boolean) =>
     ({type: SET_USER_DATA, data: {userId, email, login}, isAuth} as const)
+export const getCaptchaUrlSuccess = (url: string) =>
+    ({type: GET_CAPTCHA_URL_SUCCESS, url} as const)
 
 // thunks
 export const getAuthUserDataTC = () => async (dispatch: Dispatch<ActionsType>) => {
@@ -39,17 +47,18 @@ export const getAuthUserDataTC = () => async (dispatch: Dispatch<ActionsType>) =
         dispatch(setUserData(id, email, login, true))
     }
 }
-export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<ActionsType | FormAction>) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
     const response = await authAPI.login(email, password, rememberMe)
     if (response.resultCode === 0) {
         authAPI.authMe()
             .then(response => {
-                if (response.resultCode === 0) {
-                    const {id, login, email} = response.data
-                    dispatch(setUserData(id, email, login, true))
-                }
+                const {id, login, email} = response.data
+                dispatch(setUserData(id, email, login, true))
             })
     } else {
+        if (response.resultCode === 10) {
+            dispatch(getCaptchaUrl())
+        }
         const message = response.messages.length > 0 ? response.messages[0] : "Email or password is wrong"
         dispatch(stopSubmit("login", {_error: message}))
     }
@@ -60,4 +69,9 @@ export const logoutTC = () => async (dispatch: Dispatch<ActionsType>) => {
     if (response.resultCode === 0) {
         dispatch(setUserData(null, null, null, false))
     }
+}
+export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
+    const response = await securityAPI.getCaptchaUrl()
+    debugger
+    dispatch(getCaptchaUrlSuccess(response.url))
 }

@@ -19,7 +19,7 @@ import {
     setTotalUsersCount,
     setIsFetching, toggleIsFollowingInProgress,
 } from "./users/users-reducer";
-import {authReducer, setUserData} from "./auth-reducer";
+import {authReducer, getCaptchaUrlSuccess, setUserData} from "./auth-reducer";
 import {appReducer, setInitializedAC} from "./app-reducer";
 
 export type ActionsType =
@@ -37,6 +37,7 @@ export type ActionsType =
     | ReturnType<typeof setIsFetching>
     | ReturnType<typeof toggleIsFollowingInProgress>
     | ReturnType<typeof setUserData>
+    | ReturnType<typeof getCaptchaUrlSuccess>
     | ReturnType<typeof setInitializedAC>
 
 export type AppStateType = ReturnType<typeof rootReducer>
