@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './App.module.scss'
 import {Nav} from "./components/Nav/Nav"
-import {Route} from "react-router-dom"
+import {Redirect, Route} from "react-router-dom"
 import UsersContainer from "./components/Users/UsersContainer"
 import ProfileContainer from "./components/Profile/ProfileContainer"
 import HeaderContainer from "./components/Header/HeaderContainer"
@@ -35,6 +35,10 @@ class App extends React.Component<PropsType> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className={style.Main}>
+                    <Route
+                        path='/'
+                        render={() => <Redirect to={"/profile"}/>}
+                    />
                     <Route
                         path='/profile/:userId?'
                         render={() => <ProfileContainer/>}
