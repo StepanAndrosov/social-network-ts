@@ -32,11 +32,11 @@ const LoginForm: React.FC<Props & InjectedFormProps<LoginFormType, Props>> = (pr
             <Field id={'rememberMe'} component={'input'} name={'rememberMe'} type={'checkbox'}/> <label
             htmlFor={'rememberMe'}>remember me</label>
             {
-                props.captchaUrl && <img src={props.captchaUrl} />
+                props.captchaUrl && <img src={props.captchaUrl} alt="captcha"/>
             }
             {
-                props.error
-                && <div className={errorStyle.summaryError}>
+                props.error &&
+                <div className={errorStyle.summaryError}>
                     {props.error}
                 </div>
             }

@@ -4,7 +4,7 @@ import React from "react";
 import {UserType} from "../../redux/users/users-reducer";
 import {Paginator} from "./Paginator/Paginator";
 
-type UsersType = {
+type UsersPropsType = {
     users: Array<UserType>
     currentPage: number
     onSetCurrentPage: (page: number) => void
@@ -14,7 +14,7 @@ type UsersType = {
     followUnfollowTC: (followed: boolean, id: number) => void
 }
 
-export const Users: React.FC<UsersType> = (props) => {
+export const Users: React.FC<UsersPropsType> = (props) => {
     return (
         <div>
             <h3 className={style.header}>UsersList:</h3>

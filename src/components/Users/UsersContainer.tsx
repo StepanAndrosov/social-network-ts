@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {
-    followUnfollowTC, getUsersTC,
+    followUnfollow, getUsersTC,
     setCurrentPage, setIsFetching,
     setTotalUsersCount, setUsers,
     UserType
@@ -76,5 +76,5 @@ const mapStateToProps = (state: AppStateType): MapStateType => {
 export default connect(mapStateToProps, {
     setUsers, setTotalUsersCount,
     setCurrentPage, setIsFetching,
-    getUsersTC, followUnfollowTC
+    getUsersTC, followUnfollowTC: followUnfollow
 })(UsersContainer)

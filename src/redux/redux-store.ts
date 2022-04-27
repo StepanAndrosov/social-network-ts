@@ -20,7 +20,7 @@ import {
     setIsFetching, toggleIsFollowingInProgress,
 } from "./users/users-reducer";
 import {authReducer, getCaptchaUrlSuccess, setUserData} from "./auth-reducer";
-import {appReducer, setInitializedAC} from "./app-reducer";
+import {appReducer, setInitialized} from "./app-reducer";
 
 export type ActionsType =
     | ReturnType<typeof addPost>
@@ -38,7 +38,7 @@ export type ActionsType =
     | ReturnType<typeof toggleIsFollowingInProgress>
     | ReturnType<typeof setUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
-    | ReturnType<typeof setInitializedAC>
+    | ReturnType<typeof setInitialized>
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
@@ -51,7 +51,7 @@ const rootReducer = combineReducers({
     form: formReducer
 })
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 // @ts-ignore

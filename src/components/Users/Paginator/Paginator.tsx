@@ -3,11 +3,11 @@ import React, {useState} from "react"
 import cn from "classnames"
 
 type PropsType = {
-    pageSize: number
-    currentPage: number
     totalItemsCount: number
-    onSetCurrentPage: (pageNumber: number) => void
+    pageSize: number
     portionSize?: number
+    currentPage: number
+    onSetCurrentPage: (pageNumber: number) => void
 }
 
 export const Paginator: React.FC<PropsType> = ({
@@ -18,9 +18,7 @@ export const Paginator: React.FC<PropsType> = ({
                                                    onSetCurrentPage
                                                }) => {
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
-
     let pages: Array<number> = [];
-
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }

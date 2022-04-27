@@ -28,7 +28,7 @@ export type ProfileType = {
         youtube: string
         mainLink: string
     }
-    photos: ProfilePhoto
+    photos: ProfilePhotosType
 }
 
 export type AuthDataType = {
@@ -36,7 +36,7 @@ export type AuthDataType = {
     email: string
     login: string
 }
-type ProfilePhoto = {
+export type ProfilePhotosType = {
     small: string
     large: string
 }
@@ -92,7 +92,7 @@ export const profileAPI = {
     savePhoto(file: File) {
         const formData = new FormData()
         formData.append('image', file)
-        return instance.put<ResponseType<ProfilePhoto>>('profile/photo', formData, {
+        return instance.put<ResponseType<ProfilePhotosType>>('profile/photo', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

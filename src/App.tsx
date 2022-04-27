@@ -7,7 +7,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer"
 import HeaderContainer from "./components/Header/HeaderContainer"
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {initializeAppTC} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {withSuspense} from "./hoc/whithSuspense";
@@ -18,13 +18,13 @@ type MapStateToProps = {
     initialized: boolean
 }
 type MapDispatchType = {
-    initializeAppTC: () => void
+    initializeApp: () => void
 }
 type PropsType = MapDispatchType & MapStateToProps
 
 class App extends React.Component<PropsType> {
     componentDidMount() {
-        this.props.initializeAppTC()
+        this.props.initializeApp()
     }
 
     render() {
@@ -65,5 +65,5 @@ const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-export default connect(mapStateToProps, {initializeAppTC})(App)
+export default connect(mapStateToProps, { initializeApp})(App)
 
