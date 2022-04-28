@@ -4,9 +4,9 @@ import errorStyle from "../../../components/common/FormsControls/FormControls.mo
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {MaxLengthCreator} from "../../../utils/validators/validators";
-import {ProfileType} from "../../../api/api";
 import {AppStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
+import {ProfileType} from "../../../api/types";
 
 export type ProfileDataFormType = {
     fullName: string

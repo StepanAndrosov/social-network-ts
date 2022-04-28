@@ -2,7 +2,8 @@ import style from "./Profile.module.scss"
 import React from "react"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileType} from "../../api/api";
+import {ProfileType} from "../../api/types";
+
 
 
 export type ProfileInfoType = {

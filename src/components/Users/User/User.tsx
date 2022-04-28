@@ -6,7 +6,7 @@ type PropsType = {
     id: number
     followed: boolean
     name: string
-    status: string
+    status: string | null
     photo: any
     followingInProgress: [] | Array<number>
     followUnfollowTC: (followed: boolean, id: number) => void

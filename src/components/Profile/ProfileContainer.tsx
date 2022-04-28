@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {getStatusTC, getUserProfile, updateStatusTC, savePhoto, saveProfile} from "../../redux/profile-reducer";
-import {ProfileType} from "../../api/api";
+import {ProfileType} from "../../api/types";
+
 
 type MapStateToPropsType = {
     profile: ProfileType
@@ -13,7 +14,7 @@ type MapStateToPropsType = {
     auth: boolean
 }
 type MapDispatchType = {
-    setUserProfileTC: (userId: number | null) => void
+    getUserProfile: (userId: number | null) => void
     getStatusTC: (userId: number | undefined) => void
     updateStatusTC?: (status: string | null) => void
     savePhoto: (file: File) => void
@@ -32,7 +33,7 @@ class ProfileContainer extends Component<CommonPropsType> {
             ? this.props.authorizedUser || 15114
             : Number(this.props.match.params.userId)
 
-        this.props.setUserProfileTC(userId)
+        this.props.getUserProfile(userId)
         this.props.getStatusTC(userId)
     }
 
@@ -72,7 +73,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 const WithUrlDataComponent = withRouter(ProfileContainer)
 
 export default connect(mapStateToProps, {
-    setUserProfileTC: getUserProfile,
+    getUserProfile,
     getStatusTC,
     updateStatusTC,
     savePhoto,

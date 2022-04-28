@@ -2,6 +2,7 @@ import {ActionsType} from "./redux-store";
 import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ThunkType} from "./types";
+import {CaptchaCode, ResultCode} from "../api/types";
 
 const SET_USER_DATA = "auth/SET_USER_DATA"
 const GET_CAPTCHA_URL_SUCCESS = "auth/GET_CAPTCHA_URL_SUCCESS"
@@ -42,21 +43,21 @@ export const getCaptchaUrlSuccess = (url: string) =>
 // thunks
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     const response = await authAPI.authMe()
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCode.Success) {
         const {id, login, email} = response.data
         dispatch(setUserData(id, email, login, true))
     }
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch) => {
     const response = await authAPI.login(email, password, rememberMe)
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCode.Success) {
         authAPI.authMe()
             .then(response => {
                 const {id, login, email} = response.data
                 dispatch(setUserData(id, email, login, true))
             })
     } else {
-        if (response.resultCode === 10) {
+        if (response.resultCode === CaptchaCode.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
         const message = response.messages.length > 0 ? response.messages[0] : "Email or password is wrong"

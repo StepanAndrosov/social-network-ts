@@ -5,8 +5,8 @@ import {ProfileInfoType} from "../Profile";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import ProfileImg from "../../../accets/images/profileImg.jpg"
 import {KeyofContactsType} from "../../../redux/profile-reducer";
-import {ProfileType} from "../../../api/api";
 import {ProfileDataFormType, ProfileEditForm} from "./ProfileDataForm";
+import {ProfileType} from "../../../api/types";
 
 export const ProfileInfo: React.FC<ProfileInfoType> = (props) => {
 

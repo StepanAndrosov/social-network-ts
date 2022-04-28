@@ -1,6 +1,7 @@
 import {ActionsType} from "../redux-store";
-import {ProfilePhotosType, usersAPI} from "../../api/api";
+import {usersAPI} from "../../api/api";
 import {ThunkType} from "../types";
+import {UserType} from "../../api/types";
 
 const IS_FOLLOW = 'users/IS_FOLLOW'
 const SET_USERS = 'users/SET_USERS'
@@ -9,16 +10,6 @@ const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT'
 const IS_FETCHING = 'users/IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS'
 
-export type UserType = {
-    photos: ProfilePhotosType;
-    id: number
-    followed: boolean
-    name: string
-    status: string
-    location: { city: string, country: string }
-    userPhoto: string
-    alt: string
-}
 const initialState = {
     users: [] as Array<UserType>,
     pageSize: 20,

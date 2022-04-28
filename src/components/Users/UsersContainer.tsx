@@ -3,7 +3,6 @@ import {
     followUnfollow, getUsersTC,
     setCurrentPage, setIsFetching,
     setTotalUsersCount, setUsers,
-    UserType
 } from "../../redux/users/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
@@ -14,6 +13,7 @@ import {
     getUsers, isFetching,
     pageSize, totalUsersCount
 } from "../../redux/users/users-selector";
+import {UserType} from "../../api/types";
 
 type MapDispatchType = {
     setUsers: (users: Array<UserType>) => void
