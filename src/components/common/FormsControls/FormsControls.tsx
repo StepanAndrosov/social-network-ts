@@ -3,10 +3,14 @@ import style from "./FormControls.module.css"
 
 type FieldType = {
     input: any
-    meta: any
+    meta: {
+        touched: boolean
+        error: string
+    }
 }
 
-const FormControl: React.FC<FieldType> = ({input, meta, ...props}) => {
+const FormControl: React.FC<FieldType> = ({meta, input, ...props} ) => {
+
     const hasError = meta.touched && meta.error
 
     return (
@@ -23,7 +27,7 @@ export const Textarea: React.FC<FieldType> = (props) => {
     const {input, meta, children, ...restProps} = props
     return (
         <FormControl {...props}>
-            <textarea className={style.Textarea} {...props.input} {...restProps}  />
+            <textarea className={style.Textarea} {...input} {...restProps}  />
         </FormControl>
     )
 }
@@ -31,7 +35,7 @@ export const Input: React.FC<FieldType> = (props) => {
     const {input, meta, children, ...restProps} = props
     return (
         <FormControl {...props}>
-            <input className={style.Textarea} {...props.input} {...restProps}  />
+            <input className={style.Textarea} {...input} {...restProps}  />
         </FormControl>
     )
 }

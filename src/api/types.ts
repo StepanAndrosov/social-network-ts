@@ -49,13 +49,11 @@ type UserResponseType = {
 export enum ResultCode {
     Success = 0,
     Error = 1,
-
 }
+
 export enum CaptchaCode {
     CaptchaIsRequired = 10
 }
-
-
 
 export type {
     ResponseType,

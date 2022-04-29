@@ -13,13 +13,14 @@ type LoginFormType = {
     email: string
     password: string
     rememberMe: boolean
-}
-
-type Props = {
     captchaUrl: null | string
 }
 
-const LoginForm: React.FC<Props & InjectedFormProps<LoginFormType, Props>> = (props) => {
+type OwnPropsType = {
+    captchaUrl: string | null
+}
+
+const LoginForm: React.FC<InjectedFormProps<LoginFormType, OwnPropsType> & OwnPropsType> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={style.Login}>
             <div className={style.InputTextBlock}>
@@ -46,18 +47,14 @@ const LoginForm: React.FC<Props & InjectedFormProps<LoginFormType, Props>> = (pr
         </form>
     )
 }
-export const LoginReduxForm = reduxForm<LoginFormType, Props>({
+export const LoginReduxForm = reduxForm<LoginFormType, OwnPropsType>({
     form: 'login'
 })(LoginForm)
 
-type LoginType = {
-    loginTC: (email: string, password: string, rememberMe: boolean) => void
-}
+const Login: React.FC<MapDispatchType & MapStateType> = (props) => {
 
-
-const Login: React.FC<LoginType> = ({loginTC}, props) => {
     const onSubmit = (formData: LoginFormType) => {
-        loginTC(formData.email, formData.password, formData.rememberMe)
+        props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captchaUrl)
     }
 
     if (props.isAuth) {
@@ -71,10 +68,15 @@ const Login: React.FC<LoginType> = ({loginTC}, props) => {
         </div>
     )
 }
+
 type MapStateType = {
     captchaUrl: null | string
     isAuth: boolean
 }
+type MapDispatchType = {
+    loginTC: (email: string, password: string, rememberMe: boolean, captchaUrl: string | null) => void
+}
+
 const mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         captchaUrl: state.auth.captchaUrl,
