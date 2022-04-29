@@ -1,8 +1,5 @@
-import {ActionsType} from "./redux-store";
 import {getAuthUserData} from "./auth-reducer";
-import {ThunkType} from "./types";
-
-const INITIAL = "app/INITIAL"
+import {ActionsType, ThunkType} from "./types";
 
 const initialState = {
     initialized: false,
@@ -12,7 +9,7 @@ export type AppReducerType = typeof initialState
 
 export const appReducer = (state = initialState, action: ActionsType): AppReducerType => {
     switch (action.type) {
-        case INITIAL:
+        case 'INITIAL':
             return {
                 ...state,
                 initialized: true
@@ -23,7 +20,7 @@ export const appReducer = (state = initialState, action: ActionsType): AppReduce
 }
 
 export const setInitialized = () => {
-    return {type: INITIAL} as const
+    return {type: 'INITIAL'} as const
 }
 
 export const initializeApp = (): ThunkType => async (dispatch) => {

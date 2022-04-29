@@ -1,6 +1,4 @@
-import {ActionsType} from "./redux-store";
-
-const SEND_MESSAGE = "dialog/SEND_MESSAGE"
+import {ActionsType} from "./types";
 
 export type MessageType = {
     id: number
@@ -31,7 +29,7 @@ const initialState: DialogsPageType = {
 }
 export const dialogsReducer = (state = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case 'SEND_MESSAGE':
             const newMessage: MessageType = {
                 id: Math.random() * 100,
                 message: action.newMessageBody
@@ -45,4 +43,4 @@ export const dialogsReducer = (state = initialState, action: ActionsType): Dialo
     }
 }
 export const sendMessage = (newMessageBody: string) =>
-    ({type: SEND_MESSAGE, newMessageBody} as const)
+    ({type: 'SEND_MESSAGE', newMessageBody} as const)

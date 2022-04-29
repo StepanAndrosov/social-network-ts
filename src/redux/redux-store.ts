@@ -1,48 +1,15 @@
-import {combineReducers, createStore, applyMiddleware, compose} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunkMiddleware from "redux-thunk"
-import {
-    profileReducer,
-    addPost,
-    setUserProfile,
-    setStatus,
-    deletePost,
-    savePhotoSuccess,
-    saveProfileSuccess
-} from "./profile-reducer";
-import {dialogsReducer, sendMessage} from "./dialogs-reducer";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 import {reducer as formReducer} from 'redux-form'
-import {
-    usersReducer,
-    isFollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    setIsFetching, toggleIsFollowingInProgress,
-} from "./users/users-reducer";
-import {authReducer, getCaptchaUrlSuccess, setUserData} from "./auth-reducer";
-import {appReducer, setInitialized} from "./app-reducer";
-
-export type ActionsType =
-    | ReturnType<typeof addPost>
-    | ReturnType<typeof deletePost>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof savePhotoSuccess>
-    | ReturnType<typeof saveProfileSuccess>
-    | ReturnType<typeof sendMessage>
-    | ReturnType<typeof isFollow>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setStatus>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof setIsFetching>
-    | ReturnType<typeof toggleIsFollowingInProgress>
-    | ReturnType<typeof setUserData>
-    | ReturnType<typeof getCaptchaUrlSuccess>
-    | ReturnType<typeof setInitialized>
+import {usersReducer,} from "./users/users-reducer";
+import {authReducer} from "./auth-reducer";
+import {appReducer} from "./app-reducer";
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
