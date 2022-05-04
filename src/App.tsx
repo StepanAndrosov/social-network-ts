@@ -22,6 +22,8 @@ type MapDispatchType = {
 }
 type PropsType = MapDispatchType & MapStateToProps
 
+const SuspendedDialogs = withSuspense(DialogsContainer)
+
 class App extends React.Component<PropsType> {
     componentDidMount() {
         this.props.initializeApp()
@@ -45,7 +47,7 @@ class App extends React.Component<PropsType> {
                     />
                     <Route
                         path='/dialogs'
-                        render={withSuspense(DialogsContainer)}
+                        render={() => <SuspendedDialogs />}
                     />
                     <Route
                         path='/users'

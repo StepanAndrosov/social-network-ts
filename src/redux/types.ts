@@ -30,6 +30,7 @@ type ActionsType =
     | ReturnType<typeof setUserData>
     | ReturnType<typeof getCaptchaUrlSuccess>
     | ReturnType<typeof setInitialized>
+
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 
 export type {

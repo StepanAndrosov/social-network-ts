@@ -9,7 +9,7 @@ export type AppReducerType = typeof initialState
 
 export const appReducer = (state = initialState, action: ActionsType): AppReducerType => {
     switch (action.type) {
-        case 'INITIAL':
+        case 'app/INITIAL':
             return {
                 ...state,
                 initialized: true
@@ -20,7 +20,7 @@ export const appReducer = (state = initialState, action: ActionsType): AppReduce
 }
 
 export const setInitialized = () => {
-    return {type: 'INITIAL'} as const
+    return {type: 'app/INITIAL'} as const
 }
 
 export const initializeApp = (): ThunkType => async (dispatch) => {

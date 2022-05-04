@@ -1,6 +1,6 @@
-import {usersAPI} from "../../api/api";
 import {ActionsType, ThunkType} from "../types";
 import {UserType} from "../../api/types";
+import {usersAPI} from "../../api/usersAPI";
 
 const initialState = {
     users: [] as Array<UserType>,

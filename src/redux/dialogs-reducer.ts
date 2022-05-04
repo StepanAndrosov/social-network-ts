@@ -1,19 +1,7 @@
 import {ActionsType} from "./types";
 
-export type MessageType = {
-    id: number
-    message: string
-}
-export type DialogType = {
-    id: number
-    name: string
-}
-export type DialogsPageType = {
-    dialogsData: Array<DialogType>
-    messagesData: Array<MessageType>
-}
 
-const initialState: DialogsPageType = {
+const initialState = {
     dialogsData: [
         {id: 1, name: 'Rick'},
         {id: 2, name: 'Morty'},
@@ -27,10 +15,12 @@ const initialState: DialogsPageType = {
         {id: 4, message: 'Morty is jerk!'}
     ],
 }
+type DialogsPageType = typeof initialState
+
 export const dialogsReducer = (state = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
-        case 'SEND_MESSAGE':
-            const newMessage: MessageType = {
+        case 'dialog/SEND_MESSAGE':
+            const newMessage = {
                 id: Math.random() * 100,
                 message: action.newMessageBody
             }
@@ -43,4 +33,4 @@ export const dialogsReducer = (state = initialState, action: ActionsType): Dialo
     }
 }
 export const sendMessage = (newMessageBody: string) =>
-    ({type: 'SEND_MESSAGE', newMessageBody} as const)
+    ({type: 'dialog/SEND_MESSAGE', newMessageBody} as const)

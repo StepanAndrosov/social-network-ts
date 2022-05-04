@@ -50,11 +50,15 @@ export const Dialogs: React.FC<DialogsPropsType> = ({dialogsData, messagesData, 
             </div>
             <div className={style.messages}>
                 <div>{
-                    messagesData.map(item => <Message key={item.id + item.message} id={item.id}
-                                                      message={item.message}/>)
+                    messagesData.map(item =>
+                        <Message
+                            key={item.id + item.message}
+                            id={item.id}
+                            message={item.message}
+                        />)
                 }</div>
                 <div>
-                    <AddMessageFormRedux onSubmit={onSendMessageClick}  />
+                    <AddMessageFormRedux onSubmit={onSendMessageClick}/>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-type ResponseType<D> = {
-    resultCode: number,
+type ResponseType<D = {}, RC = ResultCode> = {
+    resultCode: RC,
     messages: Array<string>,
     data: D
 }
@@ -31,6 +31,7 @@ type ProfilePhotosType = {
     small: string
     large: string
 }
+
 type UserType = {
     followed: boolean
     id: number
@@ -40,8 +41,8 @@ type UserType = {
     uniqueUrlName: null | string
 }
 
-type UserResponseType = {
-    items: Array<UserType>
+type ResponseItemsType<Items> = {
+    items: Array<Items>
     totalCount: number
     error: null | string
 }
@@ -61,5 +62,5 @@ export type {
     ProfileType,
     ProfilePhotosType,
     UserType,
-    UserResponseType
+    ResponseItemsType
 }
