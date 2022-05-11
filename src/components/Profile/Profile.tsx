@@ -4,8 +4,6 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo"
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../api/types";
 
-
-
 export type ProfileInfoType = {
     isOwner: boolean
     savePhoto: (file: File) => void

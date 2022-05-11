@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import React from "react";
 import style from "./ProfileInfo.module.scss";
 import errorStyle from "../../../components/common/FormsControls/FormControls.module.css"
 import {Input, Textarea} from "../../common/FormsControls/FormsControls";
@@ -31,7 +31,7 @@ type Props = {
 
 const maxLength = MaxLengthCreator(50)
 
-const ProfileDataForm: FunctionComponent<Props & InjectedFormProps<ProfileDataFormType, Props>> =
+const ProfileDataForm: React.FC<Props & InjectedFormProps<ProfileDataFormType, Props>> =
     ({
          handleSubmit,
          profile,
